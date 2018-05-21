@@ -2,6 +2,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -16,6 +19,18 @@ import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { partidosService } from '../services/partidos';
+
+
+export const firebaseConfig = {
+
+  apiKey: "AIzaSyCfe2SRPaGesiyk2GkNooaf59GeW4NGHkY",
+  authDomain: "basketball-events.firebaseapp.com",
+  databaseURL: "https://basketball-events.firebaseio.com",
+  projectId: "basketball-events",
+  storageBucket: "basketball-events.appspot.com",
+  messagingSenderId: "762646087981"
+
+};
 
 
 
@@ -34,7 +49,10 @@ import { partidosService } from '../services/partidos';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,6 +70,7 @@ import { partidosService } from '../services/partidos';
   providers: [
     StatusBar,
     SplashScreen,
+    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     partidosService
   ]
