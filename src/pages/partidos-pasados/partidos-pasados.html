@@ -7,12 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>MVPs Partidos</ion-title>
+    <ion-title>Tus Partidos Pasados</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-card *ngFor="let partidoPasado of partidos_pasados; let i = index">
+    <ion-card-header>
+     Partido
+    </ion-card-header>
+  
+    <ion-list>
+      <button ion-item>
+        <ion-icon name="1" item-start></ion-icon>
+        <h4>{{partidoPasado.Lugar}}</h4>
+        <p>{{partidoPasado.Direccion}}}</p>
+        <p>{{partidoPasado.Metro}}</p>
+      </button>
+  
+    </ion-list>
+  </ion-card>
+
 
 </ion-content>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+//import { AngularFireDatabase } from 'angularfire2/database';
 //import { Observable } from 'rxjs/Observable';
 //mport { AngularFireAuth } from 'angularfire2/auth';
 
 //import * as firebase from 'firebase/app';
-import firebase from 'firebase';
+//import firebase from 'firebase';
 //import { Facebook } from '@ionic-native/facebook';
 //import { Geolocation } from '@ionic-native/geolocation';
 
