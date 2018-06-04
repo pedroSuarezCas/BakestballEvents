@@ -8,15 +8,15 @@
 
 <ion-content padding>
 
-  <h1>Hola {{displayName}}</h1>
+  <!--<h1>Hola {{displayName}}</h1>-->
   <h2>Bienvenido a BasketEventsApp</h2>  
   <p>
     En BasketEventsApp podrás unirte a partidos de baloncesto en tu localización actual.
   </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-  <button ion-button outline (click)="signInWithFacebook()">Login</button>  
-  <button ion-button outline (click)="signOut()">Logout</button>
+  <h5>
+    Login By
+  </h5>
+  <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-facebook"></ion-icon></button>  
+  <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-google"></ion-icon></button>  
+  <!-- <button ion-button outline (click)="signOut()">Logout</button>-->
 </ion-content>

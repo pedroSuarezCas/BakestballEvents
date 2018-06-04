@@ -2,9 +2,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-//import { AngularFireModule } from 'angularfire2';
-//import { AngularFireAuthModule } from 'angularfire2/auth';
-//import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -20,6 +20,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { partidosService } from '../services/partidos';
 import { partidosPasadosService } from '../services/partidos-pasados';
+import { miPerfilService } from '../services/mi_perfil';
 //import { Facebook } from '@ionic-native/facebook';
 //import { Geolocation } from '@ionic-native/geolocation';
 
@@ -51,10 +52,10 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
-    //AngularFireModule.initializeApp(firebaseConfig),
-   // AngularFireDatabaseModule,
-    //AngularFireAuthModule
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,11 +73,12 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-   // AngularFireDatabase,
+    AngularFireDatabase,
    // Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     partidosService,
-   partidosPasadosService
+   partidosPasadosService,
+   miPerfilService
   ]
 })
 export class AppModule {}

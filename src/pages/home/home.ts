@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
 //import { Observable } from 'rxjs/Observable';
 //mport { AngularFireAuth } from 'angularfire2/auth';
 
-//import * as firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 //import firebase from 'firebase';
 //import { Facebook } from '@ionic-native/facebook';
 //import { Geolocation } from '@ionic-native/geolocation';

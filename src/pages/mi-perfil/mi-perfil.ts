@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { miPerfilService} from '../../services/mi_perfil';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -15,7 +16,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MiPerfilPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  miPerfil: Array<any> = [];
+    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public perfil: miPerfilService ) {
+    this.miPerfil= perfil.getMiUsuario();
   }
 
   ionViewDidLoad() {

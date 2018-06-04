@@ -15,19 +15,23 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngFor="let usuario of miPerfil; let i = index" >
       <ion-col col-3>
 
  
             <img class="avatar" src="https://scontent.fmad3-3.fna.fbcdn.net/v/t1.0-9/10698559_10152827490397022_4143722858082771503_n.jpg?oh=ab458ab7cdf4699c87e23c48f425b506&oe=5B4DC720">
 
       </ion-col>
-
+      
    
       <ion-col col-9>
-        <h1>Pedro Suarez</h1>
-        <h5>En Madrid juega en casa</h5>
-        <p>Acude a los partidos un 87%</p>
+        <h1>Nombre: {{usuario.Nombre}}</h1>
+        <h5>Apellidos: {{usuario.Apellidos}}</h5>
+        <p>Lugar de Juego: {{usuario.Altura}}</p>
+        <p>Posición: {{usuario.Posicion}}</p>
+        <p>Lugar de Juego: {{usuario.LugarDeJuego}}</p>        
+        <p>Descripción: {{usuario.Descripcion}}</p>
+        <p>Nivel: {{usuario.Nivel}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>

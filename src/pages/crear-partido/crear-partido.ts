@@ -15,11 +15,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CrearPartidoPage {
 
+  partidoACrear: Array<any> = [];
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CrearPartidoPage');
+  }
+
+  crearPartido(){
+    this.navCtrl.push(CrearPartidoPage, {Id: 0})
   }
 
 }
