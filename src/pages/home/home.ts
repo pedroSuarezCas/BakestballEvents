@@ -67,8 +67,6 @@ getUserDetail(userid) {
 
 goTabsPage(): void{
   this.navCtrl.push(TabsPage);
-
-
 }
 
  /* constructor(public navCtrl: NavController,
