@@ -8,9 +8,9 @@ import { HomePage } from '../pages/home/home';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-//import { Facebook } from '@ionic-native/facebook';
-//import { AngularFireModule } from 'angularfire2';
-//import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { Facebook } from '@ionic-native/facebook';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 //import { AngularFireAuthModule } from 'angularfire2/auth';
 //import firebase from 'firebase';
 
@@ -32,9 +32,9 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
-   // AngularFireModule.initializeApp(firebaseConfig),
-    //AngularFireDatabaseModule,
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
    // AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
@@ -55,8 +55,8 @@ export const firebaseConfig = {
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
-
+  //rootPage:any = TabsPage;
+  rootPage:any = HomePage
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

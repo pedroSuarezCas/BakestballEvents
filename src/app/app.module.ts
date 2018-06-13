@@ -21,7 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { partidosService } from '../services/partidos';
 import { partidosPasadosService } from '../services/partidos-pasados';
 import { miPerfilService } from '../services/mi_perfil';
-//import { Facebook } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 //import { Geolocation } from '@ionic-native/geolocation';
 
 export const firebaseConfig = {
@@ -74,7 +74,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-   // Facebook,
+     Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     partidosService,
    partidosPasadosService,

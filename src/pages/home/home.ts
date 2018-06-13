@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-//import { AngularFireDatabase } from 'angularfire2/database';
+import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
+//import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
 //import { Observable } from 'rxjs/Observable';
-//mport { AngularFireAuth } from 'angularfire2/auth';
+//import { AngularFireAuth } from 'angularfire2/auth';
 
-import * as firebase from 'firebase/app';
 //import firebase from 'firebase';
-//import { Facebook } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 //import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
@@ -16,6 +18,58 @@ import * as firebase from 'firebase/app';
 export class HomePage {
 
   displayName;  
+  isLoggedIn:boolean = false;
+  users: any;
+  
+  constructor(public navCtrl : NavController , private fb: Facebook) {
+    fb.getLoginStatus()
+      .then(res => {
+        console.log(res.status);
+        if(res.status === "connect") {
+          this.isLoggedIn = true;
+        } else {
+          this.isLoggedIn = false;
+        }
+      })
+      .catch(e => console.log(e));
+  }
+
+  signInWithFacebook() {
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then(res => {
+        if(res.status === "connected") {
+          this.isLoggedIn = true;
+          this.getUserDetail(res.authResponse.userID);
+          this.goTabsPage();
+        } else {
+          this.isLoggedIn = false;
+        }
+      })
+      .catch(e => console.log('Error logging into Facebook', e));
+  }
+
+logout() {
+  this.fb.logout()
+    .then( res => this.isLoggedIn = false)
+    .catch(e => console.log('Error logout from Facebook', e));
+}
+
+getUserDetail(userid) {
+  this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+    .then(res => {
+      console.log(res);
+      this.users = res;
+    })
+    .catch(e => {
+      console.log(e);
+    });
+}
+
+goTabsPage(): void{
+  this.navCtrl.push(TabsPage);
+
+
+}
 
  /* constructor(public navCtrl: NavController,
     private afAuth: AngularFireAuth) {
@@ -28,10 +82,10 @@ export class HomePage {
     });
   }*/
 
-  constructor(public navCtrl: NavController) {
+  //constructor(public navCtrl: NavController) {
      // this.displayName = user.displayName;      
   
-  }
+ // }
 
   /*signInWithFacebook() {
     this.afAuth.auth

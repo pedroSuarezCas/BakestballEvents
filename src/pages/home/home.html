@@ -1,22 +1,28 @@
 <ion-header>
   <ion-navbar>
 		<ion-title>
-		BasketEventsApp
+		Bienvenido a BasketEventsApp
 		</ion-title>
 	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-  <!--<h1>Hola {{displayName}}</h1>-->
-  <h2>Bienvenido a BasketEventsApp</h2>  
   <p>
     En BasketEventsApp podrás unirte a partidos de baloncesto en tu localización actual.
   </p>
-  <h5>
-    Login By
-  </h5>
-  <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-facebook"></ion-icon></button>  
-  <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-google"></ion-icon></button>  
-  <!-- <button ion-button outline (click)="signOut()">Logout</button>-->
+ 
+  <div *ngIf="isLoggedIn; else facebookLogin">
+    <h5>Hola, {{users.name}} </h5>
+    <p>
+      <img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" />
+    </p>
+    <p>
+      <button ion-button icon-right (click)="logout()">
+        Logout
+      </button>
+    </p>
+  </div>
+  <ng-template #facebookLogin>
+     <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-facebook"></ion-icon></button>  
+  </ng-template>
 </ion-content>
