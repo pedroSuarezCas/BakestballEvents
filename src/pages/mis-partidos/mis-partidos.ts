@@ -14,11 +14,6 @@ import { Partido } from '../../model/partidos.note';
 
 export class MisPartidosPage {
 
- // pachangas:  AngularFireList<any>;
-    
-  //pachangasRef: AngularFireList<Partido>;
-  //partidos: Observable<Partido[]>;   
-  //pachangas=[];
   pachangas: Observable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public partidosS: PartidosListService) {
@@ -33,14 +28,7 @@ export class MisPartidosPage {
         }))
       });
 
-    //this.partidos = this.pachangasRef.snapshotChanges();
-    //this.partidos = this.pachangasRef;
     console.log(this.pachangas);
-    
-    /*for(let key in this.pachangasRef){
-      this.pachangas.push(this.pachangasRef[key]);
-    }
-    console.log(this.pachangas);*/
   }
 
   ionViewDidLoad() {

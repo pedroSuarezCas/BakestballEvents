@@ -17,27 +17,27 @@
 
     <ion-list>
         <div class="cabecera"></div>
-        <ion-card  *ngFor="let partido of pachangas; let i = index">
+        <ion-card  *ngFor="let partido of partidos | async">
             
-            <ion-card-content [ngClass]="(partido.Ganador==1)?'ganador':'perdedor'">
+            <ion-card-content [ngClass]="(partido.ganador==1)?'ganador':'perdedor'">
 
                 <ion-grid>
                     <ion-row>
                       <ion-col col-4 class="text-center">
-                          <h1>{{partido.Equipo1}}</h1>
-                          <h2>{{partido.TxtEquipo1}}</h2>
+                          <h1>{{partido.equipo1}}</h1>
+                          <h2>{{partido.txtEquipo1}}</h2>
                       </ion-col>
                     
                       <ion-col col-4 class="text-center">
                           <h5>FINAL</h5>
-                          <h6>{{partido.Fecha}}</h6>
+                          <h6>{{partido.fecha}}</h6>
                           
                       </ion-col>
 
                      
                         <ion-col col-4 class="text-center">
-                            <h1>{{partido.Equipo2}}</h1>
-                            <h2>{{partido.TxtEquipo2}}</h2>
+                            <h1>{{partido.equipo2}}</h1>
+                            <h2>{{partido.txtEquipo2}}</h2>
                           </ion-col>
                     </ion-row>
                   </ion-grid>
