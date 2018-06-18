@@ -3,8 +3,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Partido } from '../model/partidos.note';
 
 @Injectable()
-
-
 export class PartidosListService {
  
         private partidoListRef = this.db.list<Partido>('partido-list');
