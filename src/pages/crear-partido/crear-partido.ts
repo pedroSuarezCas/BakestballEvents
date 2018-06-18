@@ -4,7 +4,7 @@ import { Partido } from '../../model/partidos.note';
 import { PartidosListService } from '../../services/partidos';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-
+import moment from 'moment';
 
 /**
  * Generated class for the CrearPartidoPage page.
@@ -21,6 +21,8 @@ import { TabsPage } from '../tabs/tabs';
 
 
 export class CrearPartidoPage {
+
+  startTimeForm: string;
 
   partido : Partido = {
     titulo: '',
@@ -49,8 +51,11 @@ export class CrearPartidoPage {
   
   }
 
+ addPartido (partido : Partido){
 
-addPartido (partido : Partido){
+  partido.fecha = moment(partido.fecha).format("DD-MM-YYYYY HH:mm");
+  console.log(partido.fecha);
+  
   this.partidosListService.addPartido(partido).then(ref => {
    
     let alert = this.alertCtrl.create({
