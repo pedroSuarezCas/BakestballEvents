@@ -1,14 +1,7 @@
-import { Component } from '@angular/core';
-
-import {partidosPasadosService} from '../../services/partidos-pasados';
+import { Component, AnimationKeyframesSequenceMetadata } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the PartidosPasadosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {PartidosListService} from '../../services/partidos';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -16,10 +9,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'partidos-pasados.html',
 })
 export class PartidosPasadosPage {
-  partidos_pasados: Array<any> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public partidosPasados: partidosPasadosService) {
-    this.partidos_pasados= partidosPasados.getAllPartidosPasados();
+  pachangasJugadas: any;
+  partidos: Observable<any[]>;   
+  pachangas=[];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public partidosJugados: PartidosListService) {
+
+    this.pachangasJugadas = partidosJugados.getPartidosYaJugados();
+    //this.partidos = this.pachangasJugadas.snapshotChanges();
+    this.partidos = this.pachangasJugadas;
+    for(let key in this.partidos){
+      this.pachangas.push(this.partidos[key]);
+    }
+    console.log(this.pachangas);
   }
 
   ionViewDidLoad() {

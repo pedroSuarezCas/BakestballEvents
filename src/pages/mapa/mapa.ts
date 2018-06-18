@@ -1,12 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams , Platform  } from 'ionic-angular';
 
-/**
- * Generated class for the MapaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 declare var google;
 let map: any;
@@ -35,7 +29,7 @@ export class MapaPage {
 
   initMap() {
     navigator.geolocation.getCurrentPosition((location) => {
-      console.log(location);
+      //console.log(location);
       map = new google.maps.Map(this.mapElement.nativeElement, {
         center: {lat: location.coords.latitude, lng: location.coords.longitude},
         zoom: 15
@@ -50,6 +44,7 @@ export class MapaPage {
       }, (results,status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
+           // console.log(results[i]);
             this.createMarker(results[i]);
           }
         }
@@ -57,7 +52,7 @@ export class MapaPage {
     }, (error) => {
       console.log(error);
     }, options);
-    var myplace = {lat: -33.8665, lng: 151.1956};
+    //var myplace = {lat: -33.8665, lng: 151.1956};
   }
 
   createMarker(place) {

@@ -18,9 +18,9 @@ import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { partidosService } from '../services/partidos';
-import { partidosPasadosService } from '../services/partidos-pasados';
-import { miPerfilService } from '../services/mi_perfil';
+import { PartidosListService } from '../services/partidos';
+import { PartidosJugadosService } from '../services/partidos-jugados';
+import { miPerfilService } from '../services/jugador';
 import { Facebook } from '@ionic-native/facebook';
 //import { Geolocation } from '@ionic-native/geolocation';
 
@@ -76,8 +76,8 @@ export const firebaseConfig = {
     AngularFireDatabase,
      Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    partidosService,
-   partidosPasadosService,
+    PartidosListService,
+    PartidosJugadosService,
    miPerfilService
   ]
 })

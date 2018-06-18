@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
-import { miPerfilService} from '../../services/mi_perfil';
+import { miPerfilService} from '../../services/jugador';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the MiPerfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import { Facebook } from '@ionic-native/facebook';
 @IonicPage()
 @Component({
   selector: 'page-mi-perfil',
@@ -18,8 +11,8 @@ export class MiPerfilPage {
 
   miPerfil: Array<any> = [];
     
-  constructor(public navCtrl: NavController, public navParams: NavParams, public perfil: miPerfilService ) {
-    this.miPerfil= perfil.getMiUsuario();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public perfil: miPerfilService, private fb: Facebook ) {
+  
   }
 
   ionViewDidLoad() {

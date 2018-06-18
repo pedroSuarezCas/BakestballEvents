@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {partidosService} from '../../services/partidos';
-import {CommonModule} from '@angular/common';
-
-
-/**
- * Generated class for the MisPartidosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation. 
- */
+import { PartidosListService } from '../../services/partidos';
+import { AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -21,18 +14,30 @@ import {CommonModule} from '@angular/common';
 
 export class MisPartidosPage {
 
-  pachangas: Array<any> = [];
+ // pachangas:  AngularFireList<any>;
+    
+  pachangasRef: AngularFireList<any>;
+  partidos: Observable<any[]>;   
+  pachangas=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public partidosS: partidosService) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public partidosS: PartidosListService) {
   
-    this.pachangas = partidosS.getAllPartidos();
+
+    this.pachangasRef = partidosS.getPartidoList();
+    //this.partidos = this.pachangasRef.snapshotChanges();
+    console.log(this.pachangasRef);
+    
+    for(let key in this.pachangasRef){
+      this.pachangas.push(this.pachangasRef[key]);
+    }
     console.log(this.pachangas);
-   
-   
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MisPartidosPage');
+    console.log(this.pachangas);
   }
+  
+  
 
 }

@@ -7,22 +7,26 @@
 </ion-header>
 
 <ion-content padding>
-  <p>
-    En BasketEventsApp podrás unirte a partidos de baloncesto en tu localización actual.
-  </p>
- 
-  <div *ngIf="isLoggedIn; else facebookLogin">
-    <h5>Hola, {{users.name}} </h5>
+  <ion-card>
+  <ion-card-content>
     <p>
-      <img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" />
+     En BasketEventsApp podrás unirte a partidos de baloncesto en tu localización actual.
     </p>
-    <p>
-      <button ion-button icon-right (click)="logout()">
-        Logout
-      </button>
-    </p>
-  </div>
+    <div *ngIf="isLoggedIn; else facebookLogin">
+      <h5>Hola</h5>
+      <!--<ion-input placeholder="Nombre del partido" [(ngModel)]="partido.titulo"   type="text"></ion-input>-->
+       <p>
+        <!--<img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" />-->
+       </p>
+      <p>
+        <button ion-button icon-right (click)="logout()">
+         Logout
+        </button>
+      </p>
+    </div>
   <ng-template #facebookLogin>
      <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-facebook"></ion-icon></button>  
   </ng-template>
+</ion-card-content>
+</ion-card>
 </ion-content>

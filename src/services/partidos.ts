@@ -1,21 +1,44 @@
 import {Injectable} from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Partido } from '../model/partidos.note';
 
 @Injectable()
 
-export class partidosService{
 
-    Partidos = [
-        {Id: 1, Titulo:'Pachanga Maritornes', Fecha:'Sabado, 26 de Marzo 18:30', Lugar: 'Centro Arganzuela', Direccion: 'C/Canarias 17. 28045 MADRID, Palos de la Frontera', Metro: 'Metro Palos de la Frontera', Ubicacion: '', JugadoresApuntados: [1,2,3,4,5,9]},
-        {Id: 2, Titulo:'Liga Jueves', Fecha:'Jueves, 28 de Marzo 21:30', Lugar: 'Colegio Mal Consejo', Direccion: 'C/Canarias 17. 28045 MADRID, Palos de la Frontera', Metro: 'Metro Palos de la Frontera', Ubicacion: '', JugadoresApuntados: [1,2,3,4,5,9]},
-        {Id: 3, Titulo:'Liga Jueves', Fecha:'Viernes, 29 de Marzo 21:30', Lugar: 'Colegio Mal Consejo', Direccion: 'C/Canarias 17. 28045 MADRID, Palos de la Frontera', Metro: 'Metro Palos de la Frontera', Ubicacion: '', JugadoresApuntados: [1,2,3,4,5,9]},
-        {Id: 4, Titulo:'Liga Jueves', Fecha:'Jueves, 28 de Marzo 21:30', Lugar: 'Colegio Mal Consejo', Direccion: 'C/Canarias 17. 28045 MADRID, Palos de la Frontera', Metro: 'Metro Palos de la Frontera', Ubicacion: '', JugadoresApuntados: [1,2,3,4,5,9]}
-    ];
+export class PartidosListService {
+ 
+        private partidoListRef = this.db.list<Partido>('partido-list');
+        partidosJugados: Partido;
+        private fechaActual = new Date().getTime();
 
-    getAllPartidos(){
-        return this.Partidos;
+        constructor(private db: AngularFireDatabase) { }
+     
+        getPartidoList() {
+            return this.partidoListRef;
+        }
 
+        getPartidosYaJugados(){
+            
+            const partidos = this.db.database.ref('partido-list');
+            partidos.orderByChild('fecha')
+            .endAt(this.fechaActual);
+            return partidos;
+
+        }
+
+        getPartidoById(id_partido){
+            return this.partidoListRef.query.equalTo(id_partido);
+        }
+     
+        addPartido(partido: Partido) {
+            return this.partidoListRef.push(partido);
+        }
+     
+        updatePartido(partido: Partido) {
+            return this.partidoListRef.update(partido.id_partido, partido);
+        }
+     
+        removePartido(partido: Partido) {
+            return this.partidoListRef.remove(partido.id_partido);
+        }
     }
-
-    
-
-}

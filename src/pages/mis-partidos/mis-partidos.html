@@ -7,40 +7,40 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mis Partidos</ion-title>
+    <ion-title>PARTIDOS</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-
-   
- 
     <ion-list>
+        <div class="cabecera"></div>
         <ion-card *ngFor="let partido of pachangas; let i = index">
             <img src="https://s3.eestatic.com/2017/10/11/social/La_Jungla_253487245_50033619_1024x576.jpg"/>
             <ion-card-content>
               <ion-card-title>
-                </ion-card-title>
-              <p>
-                  
-              </p>
-              <ion-item>
+               Partido 
+              </ion-card-title>
+              <ion-item class="card-partido">
                   <ion-icon name="basketball" item-left large ></ion-icon>
-                  <h2>{{partido.Titulo}}</h2>
-                  <p>{{partido.Fecha}}</p>
+                  <h2>{{partido.titulo}}</h2>
+                  <p>{{partido.fecha}}</p>
               </ion-item>
+
               <ion-item>
                     <ion-icon name="pin" item-left large ></ion-icon>
-                    <h4>{{partido.Lugar}}</h4>
-                    <p>{{partido.Direccion}}</p>
-                    <p>{{partido.Metro}}}</p>
-                  </ion-item>
+                    <h4>{{partido.lugar}}</h4>
+                    <p>{{partido.direccion}}</p>
+              </ion-item>
+
               <ion-item>
                   <ion-icon name="body" item-left large ></ion-icon>
-                 
-                  <p></p>
+                 <!-- <h2>{{partido.JugadoresApuntados.length}} jugadores Apuntados</h2>-->
+              </ion-item>
+
+              <ion-item class="card-tiempo"> 
+                  <!--<openweathermap id="prediccion_{{i}}" class="prediccion" [options]="partido.Opciones"></openweathermap>-->
                 </ion-item>
             </ion-card-content>
           </ion-card>
