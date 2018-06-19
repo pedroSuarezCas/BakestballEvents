@@ -36,8 +36,8 @@ export class PartidosPasadosPage {
     console.log(this.pachangas);*/
   }
 
-  ionViewDidLoad() {
+  /*ionViewDidLoad() {
     console.log('ionViewDidLoad PartidosPasados');
-  }
+  }*/
 
 }

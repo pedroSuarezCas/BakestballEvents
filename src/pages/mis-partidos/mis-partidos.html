@@ -25,7 +25,7 @@
               <ion-item class="card-partido">
                   <ion-icon name="basketball" item-left large ></ion-icon>
                   <h2>{{partido.titulo}}</h2>
-                  <p>{{partido.fecha}}</p>
+                  <p>{{partido.fecha | date: 'dd/MM/yyyy H:mm'}}</p>
               </ion-item>
 
               <ion-item>

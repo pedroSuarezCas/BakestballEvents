@@ -2,12 +2,15 @@ import {Injectable} from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Partido } from '../model/partidos.note';
 import { Observable } from 'rxjs/Observable';
+import moment from 'moment';
+
 @Injectable()
 export class PartidosListService {
  
         private partidoListRef = this.db.list<Partido>('partido-list');
         partidosJugados: AngularFireDatabase;
-        private fechaActual = new Date().getTime();
+       // private fechaActual = new Date();
+        fechaActual:any;
 
         constructor(private db: AngularFireDatabase) { }
      
@@ -16,9 +19,11 @@ export class PartidosListService {
         }
 
         getPartidosYaJugados(){
- 
+             this.fechaActual = moment(new Date()).format("DD-MM-YYYYY HH:mm");
+             console.log("fecha Actual:" + this.fechaActual);
           return this.db.list<Partido>('partido-list', ref => {
-            let q =  ref.orderByChild('fecha').endAt(this.fechaActual);
+            //let q =  ref.orderByChild('fecha').endAt(this.fechaActual);
+            let q =  ref.orderByChild('fecha').startAt(this.fechaActual);
             return q;
                 }).valueChanges();
 

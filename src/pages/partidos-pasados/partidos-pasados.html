@@ -17,10 +17,10 @@
 
     <ion-list>
         <div class="cabecera"></div>
-        <ion-card  *ngFor="let partido of partidos | async">
-            
-            <ion-card-content [ngClass]="(partido.ganador==1)?'ganador':'perdedor'">
 
+        <ion-card  *ngFor="let partido of partidos | async">
+
+           <ion-card-content [ngClass]="(partido.ganador==1)?'ganador':'perdedor'">
                 <ion-grid>
                     <ion-row>
                       <ion-col col-4 class="text-center">
@@ -30,7 +30,7 @@
                     
                       <ion-col col-4 class="text-center">
                           <h5>FINAL</h5>
-                          <h6>{{partido.fecha}}</h6>
+                          <h6>{{partido.fecha | date: 'dd/MM/yyyy H:mm'}}</h6>
                           
                       </ion-col>
 
