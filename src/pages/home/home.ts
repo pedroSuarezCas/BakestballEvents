@@ -18,9 +18,16 @@ export class HomePage {
   displayName;  
   isLoggedIn:boolean = false;
   users: any;
-  jugador: Jugador;  
+  jugador : Jugador;  
+  
 
   constructor(public navCtrl : NavController , private fb: Facebook, public perfil: miPerfilService) {
+
+    this.jugador = {} as any;
+    this.jugador.nombre = ""
+    this.jugador.email= ""
+   
+
     fb.getLoginStatus()
       .then(res => {
        // console.log(res.status);
@@ -38,9 +45,9 @@ export class HomePage {
       .then(res => {
         if(res.status === "connected") {
           this.isLoggedIn = true;
-          this.jugador = this.getUserDetail(res.authResponse.userID);
-          console.log(this.jugador);
-          this.perfil.addJugador(this.jugador);
+          this.getUserDetail(res.authResponse.userID);
+          console.log("Jugador: " + this.jugador);
+          //this.perfil.addJugador(this.jugador);
           this.goTabsPage();
         } else {
           this.isLoggedIn = false;
@@ -57,19 +64,18 @@ logout() {
     .catch(e => console.log('Error logout from Facebook', e));
 }
 
-getUserDetail(userid) :any {
+getUserDetail(userid) :void {
   this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
     .then(res => {
-      console.log(res);
-      this.users = res;
-      console.log( this.users);
-      return this.users;
+      console.log("Facebook api return:" + res);
+      console.log(res.name);
+      console.log(res.email);
+      this.perfil.addJugadorByNameMail(res.name, res.email, this.jugador);
     })
     .catch(e => {
       console.log(e);
-      return;
+   
     });
-    return;
 }
 
 goTabsPage(): void{

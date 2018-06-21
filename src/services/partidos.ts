@@ -22,7 +22,6 @@ export class PartidosListService {
              this.fechaActual = moment(new Date()).format("DD-MM-YYYYY HH:mm");
              console.log("fecha Actual:" + this.fechaActual);
           return this.db.list<Partido>('partido-list', ref => {
-            //let q =  ref.orderByChild('fecha').endAt(this.fechaActual);
             let q =  ref.orderByChild('fecha').startAt(this.fechaActual);
             return q;
                 }).valueChanges();
