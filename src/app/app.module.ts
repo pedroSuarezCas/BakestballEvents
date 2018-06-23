@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { GooglePlus } from '@ionic-native/google-plus'; 
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -15,6 +16,7 @@ import { MisPartidosPage } from '../pages/mis-partidos/mis-partidos';
 import { CrearPartidoPage } from '../pages/crear-partido/crear-partido';
 import { PartidosPasadosPage } from '../pages/partidos-pasados/partidos-pasados';
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -75,6 +77,7 @@ export const firebaseConfig = {
     SplashScreen,
     AngularFireDatabase,
      Facebook,
+     GooglePlus, 
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PartidosListService,
     PartidosJugadosService,

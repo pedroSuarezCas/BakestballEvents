@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class MiPerfilPage {
 
-  miPerfil: Promise<any>;
+  miPerfil: Observable<any>;
   id_jug : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public perfil: miPerfilService, private fb: Facebook ) {
@@ -18,6 +18,7 @@ export class MiPerfilPage {
         console.log("id antes del getjugadorByid: " +res.authResponse.userID);
         this.id_jug = res.authResponse.userID;
         this.miPerfil = perfil.getJugadorById(this.id_jug);
+        console.log("Mi perfil a iterar: "+this.miPerfil);
     })
     .catch(e => console.log('Error logging into Facebook', e));
   }
