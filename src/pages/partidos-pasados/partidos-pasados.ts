@@ -2,8 +2,6 @@ import { Component, AnimationKeyframesSequenceMetadata } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {PartidosListService} from '../../services/partidos';
 import { Observable } from 'rxjs/Observable';
-import { Query } from '@angular/compiler/src/core';
-import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
 @Component({

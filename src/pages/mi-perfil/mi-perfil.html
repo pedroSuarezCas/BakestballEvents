@@ -9,16 +9,14 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row *ngFor="let usuario of miPerfil" >
+    <ion-row *ngFor="let usuario of miPerfil | async">
       <ion-col col-3>
 
             <img class="avatar" src="https://scontent.fmad3-3.fna.fbcdn.net/v/t1.0-9/10698559_10152827490397022_4143722858082771503_n.jpg?oh=ab458ab7cdf4699c87e23c48f425b506&oe=5B4DC720">
 
       </ion-col>
-      
-   
       <ion-col col-9>
-        <h1>Nombre y Apellidos: {{usuario.nombre}}</h1>
+        <h1>Usuario: {{miPerfil.nombre}}</h1>
 
       </ion-col>
     </ion-row>
