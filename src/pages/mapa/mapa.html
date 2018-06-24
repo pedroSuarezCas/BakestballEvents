@@ -7,12 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Partidos en tu zona</ion-title>
+    <ion-title>VER PARTIDOS</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div #map id="map"></div>
+ <!-- <div #map id="map"></div>-->
+ <agm-map [latitude]="latitude" [longitude]="longitude">
+
+<agm-marker  *ngFor="let partido of pachangas | async; let i = index" [latitude]="partido.lat" [longitude]="partido.log">
+</agm-marker>
+</agm-map>
 </ion-content>

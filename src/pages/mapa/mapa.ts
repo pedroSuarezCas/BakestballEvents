@@ -1,6 +1,11 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , Platform  } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { } from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
+import { Observable } from 'rxjs/Observable';
+import { Partido } from '../../model/partidos.note';
+import { PartidosListService } from '../../services/partidos';
 
 
 declare var google;
@@ -8,7 +13,7 @@ let map: any;
 let infowindow: any;
 let options = {
   enableHighAccuracy: true,
-  timeout: 5000,
+  timeout: 10000,
   maximumAge: 0
 };
 @IonicPage()
@@ -18,13 +23,70 @@ let options = {
 })
 export class MapaPage {
   private db: AngularFireDatabase;
-  
+  public zoom: number;
+  public latitude: number;
+  public longitude: number;
+
+  pachangas: Observable<any>;
+
   @ViewChild('map') mapElement: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
-    platform.ready().then(() => {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public partidosS: PartidosListService) {
+  /*  platform.ready().then(() => {
       this.initMap();
-    });
+    });*/
+
+    this.pachangas = partidosS.getPartidoList()
+    .snapshotChanges()
+    .map(
+      changes => {
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      });
+
+    console.log(this.pachangas);
   }
+  
+
+
+
+  ionViewDidLoad() {
+    //set google maps defaults
+    this.zoom = 16;
+    this.latitude = 0;
+    this.longitude = 0;
+  
+    
+  
+    //set current position
+    this.setCurrentPosition();
+    console.log("Latitud: " + this.latitude);
+    console.log("Longitud: " + this.longitude);
+    //load Places Autocomplete
+  }
+
+
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
+            //this.zoom = 4;
+        });
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   /*
   initMap() {
@@ -68,12 +130,37 @@ export class MapaPage {
     });
   }*/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*
+  
+  
   initMap() {
     navigator.geolocation.getCurrentPosition((location) => {
       //console.log(location);
       map = new google.maps.Map(this.mapElement.nativeElement, {
         center: {lat: location.coords.latitude, lng: location.coords.longitude},
-        zoom: 15
+        zoom: 10
       });
   
       infowindow = new google.maps.InfoWindow();
@@ -90,8 +177,8 @@ export class MapaPage {
       }, (results,status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
-           // console.log(results[i]);
-            this.createMarker(results[i]);
+           console.log(results[i]);
+           this.createMarker(results[i]);
           }
         }
       });
@@ -115,7 +202,7 @@ export class MapaPage {
   }
 
 
-
+*/
 
 
 

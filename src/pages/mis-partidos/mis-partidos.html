@@ -17,7 +17,7 @@
     <ion-list>
         <div class="cabecera"></div>
         <ion-card *ngFor="let partido of pachangas | async; let i = index">
-            <img src="https://s3.eestatic.com/2017/10/11/social/La_Jungla_253487245_50033619_1024x576.jpg"/>
+            <agm-map [latitude]="partido.lat" [longitude]="partido.log"></agm-map>
             <ion-card-content>
               <ion-card-title>
                Partido 

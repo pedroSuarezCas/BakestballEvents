@@ -1,0 +1,62 @@
+<!--
+  Generated template for the AdminitraPartidoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ACTUALIZA PARTIDO</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div class="cabecera"></div>
+  
+  <ion-list>
+    
+      <ion-item>
+        <h1>{{partidoRecibido.titulo}}</h1>
+      </ion-item>
+
+      <ion-item>
+        <h2>{{partidoRecibido.lugar}}</h2>
+         
+      </ion-item>
+
+      <ion-item>
+        <h3> {{partidoRecibido.fecha}} </h3>
+      </ion-item>
+
+      <ion-item>
+          <ion-label floating>Nombre equipo local</ion-label>
+          <ion-input [(ngModel)]="partidoRecibido.txtEquipo1" type="text"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+            <ion-label floating>Resultado equipo local</ion-label>
+            <ion-input [(ngModel)]="partidoRecibido.equipo1" type="text"></ion-input>
+          </ion-item>
+        <ion-item>
+          <ion-label floating>Nombre equipo visitante</ion-label>
+          <ion-input [(ngModel)]="partidoRecibido.txtEquipo2" type="text"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+            <ion-label floating>Resultado equipo visitante</ion-label>
+            <ion-input [(ngModel)]="partidoRecibido.equipo2" type="text"></ion-input>
+          </ion-item>
+      
+    </ion-list>
+   
+   
+  
+
+    <button ion-button full (click)="actualizarPartido(partidoRecibido)">Actualizar Partido</button>
+
+
+</ion-content>
