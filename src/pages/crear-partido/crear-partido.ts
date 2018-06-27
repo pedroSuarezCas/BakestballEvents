@@ -24,14 +24,15 @@ export class CrearPartidoPage {
 
   startTimeForm: string;
 
-  partido : Partido = {
+    partido : Partido = {
     titulo: '',
     fecha: '',
-    lugar: '',
+    ciudad: '',
     direccion: '',
     nombreCancha: '',
     cubierta: false,
-    ubicacion: '',
+    lat: 0,
+    log: 0,
     Opciones: {
         apikey: '',
         city: '',
@@ -43,6 +44,8 @@ export class CrearPartidoPage {
     txtEquipo1: '',
     txtEquipo2: '',
     ganador:''
+  
+
   };
 
 
@@ -74,9 +77,8 @@ cleanInputs(){
   this.partido.titulo="";
   this.partido.direccion="",
   this.partido.fecha="";
-  this.partido.lugar="";
+  this.partido.ciudad="";
   this.partido.nombreCancha="";
-  this.partido.ubicacion="";
   this.partido.cubierta=false;
   this.partido.equipo1="";
   this.partido.equipo2="";

@@ -2,11 +2,12 @@ export interface Partido {
     id_partido?: string; 
     titulo: string;
     fecha: string;
-    lugar: string;
+    ciudad: string;
     direccion: string;
+    lat: number;
+    log: number;
     nombreCancha: string;
     cubierta: boolean;
-    ubicacion: string; 
     Opciones: {
         apikey: string;
         city: string;
@@ -18,5 +19,4 @@ export interface Partido {
     txtEquipo1: string;
     txtEquipo2: string;
     ganador:string;
-
 }
