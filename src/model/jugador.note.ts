@@ -1,5 +1,6 @@
 export interface Jugador {
-    id_jugador?: string; 
+    key?: string;
+    id_jugador: string; 
     nombre: string;
     email: string;
 }

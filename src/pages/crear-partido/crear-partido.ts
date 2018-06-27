@@ -23,7 +23,6 @@ export class CrearPartidoPage {
   public latitude: number;
   public longitude: number;
   public ciudad: string;
-
   public searchControl: FormControl;
   public zoom: number;
 
@@ -35,6 +34,7 @@ export class CrearPartidoPage {
   startTimeForm: string;
 
   partido : Partido = {
+    id_partido:'',
     titulo: '',
     fecha: '',
     ciudad: '',
@@ -68,7 +68,8 @@ export class CrearPartidoPage {
   }
 
  addPartido (partido : Partido){
-
+   
+  //partido.id_partido =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   partido.fecha = moment(partido.fecha).format("DD-MM-YYYYY HH:mm");
   console.log(partido.fecha);
   partido.lat = this.latitude;
@@ -88,7 +89,6 @@ export class CrearPartidoPage {
 }
 
 cleanInputs(){
-
   this.partido.titulo="";
   this.partido.direccion="",
   this.partido.fecha="";

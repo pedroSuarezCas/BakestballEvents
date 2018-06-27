@@ -37,10 +37,11 @@ export class PartidosListService {
         }
      
         updatePartido(partido: Partido) {
-            return this.partidoListRef.update(partido.id_partido, partido);
+            console.log("Partido a updatear"+  partido);
+            return this.partidoListRef.update(partido.key, partido);
         }
      
         removePartido(partido: Partido) {
-            return this.partidoListRef.remove(partido.id_partido);
+            return this.partidoListRef.remove(partido.key);
         }
     }

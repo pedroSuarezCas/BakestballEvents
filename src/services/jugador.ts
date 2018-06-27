@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import { Jugador } from '../model/jugador.note';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+
 
 @Injectable()
 
@@ -25,35 +27,63 @@ export class miPerfilService{
                  }).valueChanges();
  
      }
-    getLengthJugadorById(id_jugador:string){
-      
-      var query =  this.db.list<Jugador>('jugador-list').query.orderByChild('id_jugador').equalTo(id_jugador).on("value", function(snapshot) {
-            return snapshot.numChildren();})
-           console.log("Que esta devolviendo getlengthJugadorById: " +query );
+    getLengthJugadorById(id_jugador:string) {
+        
+       // return Number(subscriber => {
+        //let count=-1;
 
-            return  this.db.list<Jugador>('jugador-list').query.orderByChild('id_jugador').equalTo(id_jugador).on("value", function(snapshot) {
+        return Observable.create(subscriber =>{
+
+       const ref = this.db.list<Jugador>('jugador-list').query
+        .orderByChild('id_jugador')
+        .equalTo(id_jugador)
+        const callbackFn = ref.on("value", (snapshot) => {
                 console.log("Hemos encontrado: "+snapshot.numChildren()+" hijos");
-                return snapshot.numChildren();
-            });
+                 return snapshot.numChildren();
+            }); 
+            console.log( "callbackFn: " +callbackFn );
+            return () => ref.off('value', callbackFn);
+        });
+
+        //console.log("count a retornar: "+count);
+         //return count;
+        /* var count;
+        return this.db.list<Jugador>('jugador-list').query
+        .orderByChild('id_jugador')
+        .equalTo(id_jugador)
+        .on("value", (snapshot) => {
+            snapshot.forEach(function(child) : boolean {
+                if(child.val().Name != undefined){
+                  count++;
+                }
+                return true;
+              });
+              return count;
+            });*/
+    // });
+
     }
     addJugador(jugador: Jugador) {
             return this.jugadorListRef.push(jugador);
     }
     addJugadorByNameMail(name: string, email:string, _id:string , jugador1 : Jugador) {
-
         jugador1.nombre=name;
         jugador1.email=email;
-        jugador1.id_jugador=_id;
+        //jugador1.key=_id;
         console.log("Insertando Jugador" +jugador1);
         return this.jugadorListRef.push(jugador1);
     }
 
     updateJugador(jugador: Jugador) {
-        return this.jugadorListRef.update(jugador.id_jugador, jugador);
+        //const $key = jugador.$key
+           // delete jugador.$key
+        return this.jugadorListRef.update(jugador.key, jugador);
     }
 
     removeJugador(jugador: Jugador) {
-        return this.jugadorListRef.remove(jugador.id_jugador);
+       // const $key = jugador.$key
+       // delete jugador.$key
+        return this.jugadorListRef.remove(jugador.key);
     }
 
 

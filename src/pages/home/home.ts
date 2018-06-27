@@ -78,9 +78,11 @@ getUserDetail(userid) :void {
 
 getIfUserExits(userid) : Boolean{
     console.log("id a buscar: " + userid);
-    console.log("Tamaño de la busqueda de jugadorById: "+ String(this.perfil.getLengthJugadorById(userid)));
+    console.log("getLegthjugadorById: "+ this.perfil.getLengthJugadorById(userid));
+    console.log("getLegthjugadorById.toString: "+ this.perfil.getLengthJugadorById(userid));
     //Si no he encontrado ningun usuario con ese id devuelvo cierto -> debería insertarlo arriba
-    if (String(this.perfil.getLengthJugadorById(userid)) === "0") 
+   //var hijos = parseInt(localStorage.getItem(this.perfil.getLengthJugadorById(userid)));
+    if (this.perfil.getLengthJugadorById(userid) != 0) 
       return true;
     else 
       return false;

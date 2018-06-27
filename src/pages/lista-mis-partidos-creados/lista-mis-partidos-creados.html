@@ -16,7 +16,8 @@
 <ion-content>
   <ion-list>
    <button ion-item *ngFor="let partido of misPartidos | async" (click)="abrirAdminstracionPartido(partido)" icon-start>
-     <h1> {{ partido.titulo }}</h1>
+
+    <h1> {{ partido.titulo }}</h1>
       <h2>{{ partido.lugar }}</h2>
      <h5> {{ partido.fecha }}</h5>
     </button> 

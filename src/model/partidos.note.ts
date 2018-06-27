@@ -1,5 +1,6 @@
 export interface Partido {
-    id_partido?: string; 
+    key?: string; 
+    id_partido: string;
     titulo: string;
     fecha: string;
     ciudad: string;
