@@ -28,6 +28,7 @@ export class AdminitraPartidoPage {
     this.partidoRecibido.txtEquipo2 = partido.txtEquipo2;
     this.partidoRecibido.equipo1 = partido.equipo1;
     this.partidoRecibido.equipo2 = partido.equipo2;
+    console.log("Partido a actualizar: "+ this.partidoRecibido);
 
     this.partidosS.updatePartido(this.partidoRecibido);
   }

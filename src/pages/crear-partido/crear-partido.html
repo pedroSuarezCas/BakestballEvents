@@ -6,16 +6,12 @@
 
 
 <ion-content>
-    <div class="cabecera"></div>
+    <agm-map [latitude]="latitude" [longitude]="longitude"></agm-map>
   
   <ion-list>
     
       <ion-item>
         <ion-input placeholder="Nombre del partido" [(ngModel)]="partido.titulo"   type="text"></ion-input>
-      </ion-item>
-
-      <ion-item>
-          <ion-input placeholder="Ciudad" id="places" [(ngModel)]="partido.lugar" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -52,15 +48,15 @@
 
     </ion-list>
     <ion-item>
-      <ion-label fixed>Equipo 1</ion-label>
-      <ion-input [(ngModel)]="partido.equipo1" type="text"></ion-input>
+      <ion-label floating>Nombre equipo local</ion-label>
+      <ion-input [(ngModel)]="partido.txtEquipo1" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Equipo 2</ion-label>
-      <ion-input [(ngModel)]="partido.equipo2" type="text"></ion-input>
+      <ion-label floating>Nombre equipo visitante</ion-label>
+      <ion-input [(ngModel)]="partido.txtEquipo2" type="text"></ion-input>
     </ion-item>
 
-    <button ion-button block clear (click)="addPartido(partido)">Crear  Partido</button>
+    <button ion-button full (click)="addPartido(partido)">Crear  Partido</button>
 
 
 </ion-content>

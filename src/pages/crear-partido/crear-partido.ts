@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Partido } from '../../model/partidos.note';
 import { PartidosListService } from '../../services/partidos';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import moment from 'moment';
+import {FormControl} from "@angular/forms";
+import { } from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
 
-/**
- * Generated class for the CrearPartidoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
+declare var google: any;
 
 @IonicPage()
 @Component({
@@ -21,10 +20,21 @@ import moment from 'moment';
 
 
 export class CrearPartidoPage {
+  public latitude: number;
+  public longitude: number;
+  public ciudad: string;
+
+  public searchControl: FormControl;
+  public zoom: number;
+
+  @ViewChild("search")
+  public searchElementRef;
+
+
 
   startTimeForm: string;
 
-    partido : Partido = {
+  partido : Partido = {
     titulo: '',
     fecha: '',
     ciudad: '',
@@ -44,23 +54,28 @@ export class CrearPartidoPage {
     txtEquipo1: '',
     txtEquipo2: '',
     ganador:''
-  
-
   };
 
 
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private partidosListService : PartidosListService) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private partidosListService : PartidosListService, private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone) {
   
+    this.searchControl = new FormControl();
+
+
+
   }
 
  addPartido (partido : Partido){
 
   partido.fecha = moment(partido.fecha).format("DD-MM-YYYYY HH:mm");
   console.log(partido.fecha);
-  
+  partido.lat = this.latitude;
+  partido.log = this.longitude;
+  partido.ciudad = this.ciudad;
   this.partidosListService.addPartido(partido).then(ref => {
-   
+    partido.direccion
     let alert = this.alertCtrl.create({
       title: 'Creando Partido',
       subTitle: 'Ha creado el partido correctamente',
@@ -79,6 +94,8 @@ cleanInputs(){
   this.partido.fecha="";
   this.partido.ciudad="";
   this.partido.nombreCancha="";
+  this.partido.lat = 0;
+  this.partido.log = 0;
   this.partido.cubierta=false;
   this.partido.equipo1="";
   this.partido.equipo2="";
@@ -90,5 +107,64 @@ cleanInputs(){
   this.partido.Opciones.unitFormat="";
 }
 
+
+ionViewDidLoad() {
+  //set google maps defaults
+  this.zoom = 16;
+  this.latitude = 0;
+  this.longitude = 0;
+
+  //create search FormControl
+  this.searchControl = new FormControl();
+
+  //set current position
+  this.setCurrentPosition();
+  console.log("Latitud: " + this.latitude);
+  console.log("Longitud: " + this.longitude);
+  //load Places Autocomplete
+  this.mapsAPILoader.load().then(() => {
+        let nativeHomeInputBox = document.getElementById('places').getElementsByTagName('input')[0];
+        let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
+            types: ["address"]
+        });
+        
+        autocomplete.addListener("place_changed", ref => {
+            this.ngZone.run(() => {
+                //get the place result
+               
+                
+                let place = autocomplete.getPlace();
+                
+                //verify result
+                if (place.geometry === undefined || place.geometry === null) {
+                    return;
+                }
+
+                //set latitude, longitude and zoom
+                this.latitude = place.geometry.location.lat();
+                this.longitude = place.geometry.location.lng();
+               this.ciudad = place.vicinity;
+                
+                console.log("Latitud: " + this.latitude);
+                console.log("Longitud: " + this.longitude);
+                console.log("Ciudad: " + this.ciudad);
+                //this.zoom = 4;
+                
+        });
+    });
+  });
+}
+
+private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
+            //this.zoom = 4;
+        });
+    }
+  }
+
+  
 
 }
