@@ -25,6 +25,8 @@ import { PartidosListService } from '../services/partidos';
 import { PartidosJugadosService } from '../services/partidos-jugados';
 import { miPerfilService } from '../services/jugador';
 import { Facebook } from '@ionic-native/facebook';
+import { OpenWeatherMapModule } from 'ionic-openweathermap';
+import { HttpModule } from '@angular/http';
 //import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
 
@@ -58,6 +60,8 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    OpenWeatherMapModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,

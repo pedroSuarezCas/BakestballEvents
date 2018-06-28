@@ -9,7 +9,6 @@ import {FormControl} from "@angular/forms";
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 
-
 declare var google: any;
 
 @IonicPage()
@@ -23,13 +22,12 @@ export class CrearPartidoPage {
   public latitude: number;
   public longitude: number;
   public ciudad: string;
+  public direccion: string;
   public searchControl: FormControl;
   public zoom: number;
 
   @ViewChild("search")
   public searchElementRef;
-
-
 
   startTimeForm: string;
 
@@ -44,10 +42,10 @@ export class CrearPartidoPage {
     lat: 0,
     log: 0,
     Opciones: {
-        apikey: '',
+        apikey: '925553bcd93cef1c7dad01652b823e68',
         city: '',
-        unitFormat: '',
-        lang: '',
+        unitFormat: 'metric',
+        lang: 'es',
     },
     equipo1: '',
     equipo2: '',
@@ -63,20 +61,21 @@ export class CrearPartidoPage {
   
     this.searchControl = new FormControl();
 
-
-
   }
 
  addPartido (partido : Partido){
    
   //partido.id_partido =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  partido.fecha = moment(partido.fecha).format("DD-MM-YYYYY HH:mm");
-  console.log(partido.fecha);
+  partido.fecha = moment(partido.fecha).format("DD-MM-YYYY HH:mm");
   partido.lat = this.latitude;
   partido.log = this.longitude;
   partido.ciudad = this.ciudad;
+  partido.direccion = this.direccion;
+  partido.Opciones.city= "{name:["+partido.ciudad+"]}";
+  console.log("partido.direccion: " + partido.direccion);
+  console.log("partido.Opciones.city: " + partido.Opciones.city);
+
   this.partidosListService.addPartido(partido).then(ref => {
-    partido.direccion
     let alert = this.alertCtrl.create({
       title: 'Creando Partido',
       subTitle: 'Ha creado el partido correctamente',
@@ -101,10 +100,10 @@ cleanInputs(){
   this.partido.equipo2="";
   this.partido.txtEquipo1="";
   this.partido.txtEquipo2="";
-  this.partido.Opciones.apikey="";
+  this.partido.Opciones.apikey="925553bcd93cef1c7dad01652b823e68";
   this.partido.Opciones.city="";
-  this.partido.Opciones.lang="";
-  this.partido.Opciones.unitFormat="";
+  this.partido.Opciones.lang="metric";
+  this.partido.Opciones.unitFormat="es";
 }
 
 
@@ -131,10 +130,8 @@ ionViewDidLoad() {
         autocomplete.addListener("place_changed", ref => {
             this.ngZone.run(() => {
                 //get the place result
-               
-                
                 let place = autocomplete.getPlace();
-                
+                console.log("get place: "+place);
                 //verify result
                 if (place.geometry === undefined || place.geometry === null) {
                     return;
@@ -143,7 +140,14 @@ ionViewDidLoad() {
                 //set latitude, longitude and zoom
                 this.latitude = place.geometry.location.lat();
                 this.longitude = place.geometry.location.lng();
-               this.ciudad = place.vicinity;
+                this.ciudad = place.vicinity;
+                console.log ("direccion 1:" + place.formatted_address);
+                console.log ("direccion 2:" + place.name);
+                console.log ("direccion 3:" + place.vicinity);
+                console.log ("direccion 4:" + place.geometry.location);
+                //console.log ("direccion 5:" + );
+                //console.log ("direccion 6:" + );
+                this.direccion = place.formatted_address;
                 
                 console.log("Latitud: " + this.latitude);
                 console.log("Longitud: " + this.longitude);
