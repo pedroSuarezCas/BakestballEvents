@@ -17,7 +17,21 @@
  <!-- <div #map id="map"></div>-->
  <agm-map [latitude]="latitude" [longitude]="longitude">
 
-<agm-marker  *ngFor="let partido of pachangas | async; let i = index" [latitude]="partido.lat" [longitude]="partido.log">
+<agm-marker  *ngFor="let partido of pachangas | async; let i = index" [latitude]="partido.lat" [longitude]="partido.log" (markerClick)="markerClick(infoWindow, partido)"   >
+  <agm-info-window [disableAutoPan]="false" #infoWindow>
+
+    <div>
+       <p><b>Nombre:</b> {{partido.titulo}} </p>
+       <p><b>Fecha del partido:</b> {{partido.fecha}} </p>
+       <p><b>Direccion del partido:</b> {{partido.direccion}} </p>
+     
+    </div>
+    <div>
+        <button ion-button full (click)="apuntarseAPartido(partido)">Apuntarse</button>
+    </div>
+
+</agm-info-window>
+
 </agm-marker>
 </agm-map>
 </ion-content>

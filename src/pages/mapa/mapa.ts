@@ -78,7 +78,17 @@ export class MapaPage {
 
 
 
+  markerClick(infoWindow, partido) {
+    if (partido.lastOpen != null) {
+          partido.lastOpen.close();
+       }
+    partido.lastOpen = infoWindow;
+    infoWindow.open();
+    }
+    
+    apuntarseAPartido(partido){
 
+    }
 
 
 
