@@ -29,6 +29,7 @@ import { OpenWeatherMapModule } from 'ionic-openweathermap';
 import { HttpModule } from '@angular/http';
 //import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
+//import { GooglePlus } from '@ionic-native/google-plus'; 
 
 export const firebaseConfig = {
 

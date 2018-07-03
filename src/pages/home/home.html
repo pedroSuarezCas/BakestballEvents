@@ -8,7 +8,7 @@
 
 <ion-content padding>
   <ion-card>
-  <ion-card-content>
+    <ion-card-content>
     <p>
      En BasketEventsApp podrás unirte a partidos de baloncesto en tu localización actual.
     </p>
@@ -25,8 +25,10 @@
       </p>
     </div>
   <ng-template #facebookLogin>
-     <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-facebook"></ion-icon></button>  
-  </ng-template>
-</ion-card-content>
+       <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-facebook"></ion-icon></button>  
+   </ng-template>
+      <button ion-button outline (click)="loginWithGoogle()"> <ion-icon name="logo-google"></ion-icon></button>  
+
+  </ion-card-content>
 </ion-card>
 </ion-content>

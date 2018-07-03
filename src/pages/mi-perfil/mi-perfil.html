@@ -9,15 +9,15 @@
 
 <ion-content padding>
   <ion-grid>
-   <ion-row *ngFor="let usuario of miPerfil | async">
-      <ion-col col-3>
+   <ion-row *ngFor="let usuario of miPerfil | async | slice:0;  let i = index; first as isFirst">
+      <ion-col col-3 *ngIf="isFirst">
 
-            <img class="avatar" src="https://scontent.fmad3-3.fna.fbcdn.net/v/t1.0-9/10698559_10152827490397022_4143722858082771503_n.jpg?oh=ab458ab7cdf4699c87e23c48f425b506&oe=5B4DC720">
+        <img class="avatar" src="https://cdn.pixabay.com/photo/2012/04/13/17/54/silhouette-33072_960_720.png">
 
       </ion-col>
       <ion-col col-9>
-        <h1>Usuario: {{usuario.nombre}}</h1>
-        <h2>Contacto: {{usuario.email}}</h2>
+         <h3 >Usuario: {{usuario.nombre}}</h3>
+         <h4 >Contacto: {{usuario.email}}</h4>
       </ion-col>
     </ion-row>
 	 <ion-row>

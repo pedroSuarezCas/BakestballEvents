@@ -6,6 +6,11 @@ import { Facebook } from '@ionic-native/facebook';
 //import { Geolocation } from '@ionic-native/geolocation';
 import { Jugador } from '../../model/jugador.note';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import AuthProvider = firebase.auth.AuthProvider;
+
+
 
 @Component({
   selector: 'page-home',
@@ -15,16 +20,22 @@ export class HomePage {
 
   displayName;  
   isLoggedIn : boolean = false;
-  users : any;
   jugador : Jugador;  
   jugadorDevuelto : Observable<Jugador[]>;
+  private user: firebase.User;
 
-  constructor(public navCtrl : NavController , private fb: Facebook, public perfil: miPerfilService) {
+  constructor(public navCtrl : NavController  ,private fb: Facebook, public perfil: miPerfilService, public afAuth: AngularFireAuth) {
 
     this.jugador = {} as any;
-    this.jugador.nombre = ""
-    this.jugador.email= ""
+    this.jugador.id_jugador="";
+    this.jugador.nombre = "";
+    this.jugador.email= "";
+
+    afAuth.authState.subscribe(user => {
+			this.user = user;
+		});
    
+    
 
     fb.getLoginStatus()
       .then(res => {
@@ -90,6 +101,16 @@ getIfUserExits(userid) : Boolean{
 
 goTabsPage(): void{
   this.navCtrl.push(TabsPage);
+  
 }
 
+loginWithGoogle() {
+  this.perfil.signInWithGoogle()
+    .then(
+      () => this.goTabsPage(),
+      error => console.log(error.message)
+    );
+  
+  }
+  
 }
