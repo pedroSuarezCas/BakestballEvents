@@ -36,12 +36,19 @@
 
               <ion-item>
                   <ion-icon name="body" item-left large ></ion-icon>
-                 <!-- <h2>{{partido.JugadoresApuntados.length}} jugadores Apuntados</h2>-->
+                    <h2>Jugadores Apuntados: {{partido.jugadoresApuntados}}</h2>
               </ion-item>
+              
+            <!--  <ion-item>
+                <ion-icon name="body" item-left large ></ion-icon>
+                  <h2>opciones: {{partido.Opciones.city}}</h2>
+            </ion-item>-->
+            
 
-              <ion-item class="card-tiempo"> 
+            <!--  <ion-item class="card-tiempo"> 
                   <openweathermap id="prediccion_{{i}}" class="prediccion" [options]="partido.Opciones"></openweathermap>
-                </ion-item>
+                  <openweathermap  [options]="partido.Opciones"></openweathermap>
+                </ion-item>-->
             </ion-card-content>
           </ion-card>
     </ion-list>

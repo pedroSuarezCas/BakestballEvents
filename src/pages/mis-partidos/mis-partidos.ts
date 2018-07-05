@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PartidosListService } from '../../services/partidos';
-import { AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { Partido } from '../../model/partidos.note';
+import { PartidosJugadoresService } from '../../services/partido-jugadores';
 @IonicPage()
 @Component({
   selector: 'page-mis-partidos',
@@ -11,14 +10,16 @@ import { Partido } from '../../model/partidos.note';
 })
 
 
-
 export class MisPartidosPage {
 
   pachangas: Observable<any>;
+  //partidosJugadores : Observable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public partidosS: PartidosListService) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public partidosJugadoresS : PartidosJugadoresService,
+    public partidosS: PartidosListService) {
   
-
     this.pachangas = partidosS.getPartidoList()
     .snapshotChanges()
     .map(
@@ -28,6 +29,9 @@ export class MisPartidosPage {
         }))
       });
 
+      //this.partidosJugadores = partidosJugadoresS.getPartidoByIdJugador();
+
+
     console.log(this.pachangas);
   }
 
@@ -35,6 +39,4 @@ export class MisPartidosPage {
     console.log(this.pachangas);
   }
   
-  
-
 }

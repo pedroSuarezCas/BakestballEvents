@@ -22,7 +22,7 @@ import { ListaMisPartidosCreadosPage } from '../pages/lista-mis-partidos-creados
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PartidosListService } from '../services/partidos';
-import { PartidosJugadosService } from '../services/partidos-jugados';
+import { PartidosJugadoresService } from '../services/partido-jugadores';
 import { miPerfilService } from '../services/jugador';
 import { Facebook } from '@ionic-native/facebook';
 import { OpenWeatherMapModule } from 'ionic-openweathermap';
@@ -94,7 +94,7 @@ export const firebaseConfig = {
      GooglePlus, 
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PartidosListService,
-    PartidosJugadosService,
+    PartidosJugadoresService,
    miPerfilService
   ]
 })

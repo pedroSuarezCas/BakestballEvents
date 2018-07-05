@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Partido } from '../model/partidos.note';
-import { Observable } from 'rxjs/Observable';
 import moment from 'moment';
 
 @Injectable()
@@ -31,15 +30,35 @@ export class PartidosListService {
         getPartidoById(id_partido){
             return this.partidoListRef.query.equalTo(id_partido);
         }
+
+        getpartidoByKey(partido){
+            return this.partidoListRef.query.equalTo(partido.key);
+        }
      
         addPartido(partido: Partido) {
             return this.partidoListRef.push(partido);
         }
      
         updatePartido(partido: Partido) {
-            console.log("Partido a updatear"+  partido);
             return this.partidoListRef.update(partido.key, partido);
         }
+
+       /* updatePartidoByApuntarse(partido: Partido) {
+            this.db.list<Partido>('partido-list')
+            .valueChanges()
+            .subscribe(snapshots => {
+                snapshots.forEach(snapshot => {
+                 partido.jugadoresApuntados.push(snapshot.jugadoresApuntados.values())
+                });
+
+                .snapshotChanges()
+                .map(
+                  changes => {
+                    return changes.map(c => ({
+                      key: c.payload.key, ...c.payload.val()
+                    }))
+
+                  }*/
      
         removePartido(partido: Partido) {
             return this.partidoListRef.remove(partido.key);

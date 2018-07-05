@@ -4,9 +4,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs/Observable';
-import { Partido } from '../../model/partidos.note';
+import { PartidosJugadoresService } from '../../services/partido-jugadores';
 import { PartidosListService } from '../../services/partidos';
-
+import { PartidosJugadores } from '../../model/partidosJugadores.note';
+import { Partido } from '../../model/partidos.note';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Facebook } from '@ionic-native/facebook';
 
 declare var google;
 let map: any;
@@ -28,9 +31,14 @@ export class MapaPage {
   public longitude: number;
 
   pachangas: Observable<any>;
+  currentUser : any;
 
   @ViewChild('map') mapElement: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public partidosS: PartidosListService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, 
+    public partidosS: PartidosListService,
+    public partidosJugadoresService : PartidosJugadoresService,
+    public afAuth: AngularFireAuth,
+    private fb: Facebook) {
   /*  platform.ready().then(() => {
       this.initMap();
     });*/
@@ -48,15 +56,11 @@ export class MapaPage {
   }
   
 
-
-
   ionViewDidLoad() {
     //set google maps defaults
     this.zoom = 16;
     this.latitude = 0;
     this.longitude = 0;
-  
-    
   
     //set current position
     this.setCurrentPosition();
@@ -77,25 +81,44 @@ export class MapaPage {
   }
 
 
-
   markerClick(infoWindow, partido) {
     if (partido.lastOpen != null) {
           partido.lastOpen.close();
        }
     partido.lastOpen = infoWindow;
     infoWindow.open();
+    
     }
     
-    apuntarseAPartido(partido){
+    apuntarseAPartido(partido : Partido){
+     this.currentUser = this.afAuth.auth.currentUser;
+      if( this.currentUser != null){
+       // partido.id_jugador = this.currentUser.uid;
+       console.log("Apuntarse a partido via gmail con user " + this.currentUser);
+       partido.jugadoresApuntados.push(this.currentUser.displayName);
+      }else{
+        this.fb.getLoginStatus().then(res =>{
+          console.log("Apuntarse a partido via face con user "+ res.authResponse.name );
+          partido.jugadoresApuntados.push(res.authResponse.name);
+        //partido.id_jugador = res.authResponse.name;
+        });
+      }
+      console.log("Jugadores apuntados que vamos a grabar: "+ partido.jugadoresApuntados)
+      console.log("partido a updatear" + partido)
+      this.partidosS.updatePartido(partido);
+
+      /*this.currentUser = this.afAuth.auth.currentUser;
+      if( this.currentUser != null){
+        partido.id_jugador = this.currentUser.uid;
+      }else{
+        this.fb.getLoginStatus().then(res =>{
+          console.log("id antes del getjugadorByid: " +res.authResponse.userID);
+        partido.id_jugador = res.authResponse.userID;
+        });
+        this.partidosJugadoresService.updatePartidoJugadores(partido);
+      }*/
 
     }
-
-
-
-
-
-
-
 
 
   /*

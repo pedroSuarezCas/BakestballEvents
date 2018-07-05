@@ -19,5 +19,6 @@ export interface Partido {
     equipo2: string;
     txtEquipo1: string;
     txtEquipo2: string;
-    ganador:string;
+    ganador: string;
+    jugadoresApuntados: Array<string>;
 }

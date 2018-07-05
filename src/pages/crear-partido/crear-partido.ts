@@ -1,6 +1,8 @@
 import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Partido } from '../../model/partidos.note';
+import { PartidosJugadores } from '../../model/partidosJugadores.note';
+import { PartidosJugadoresService } from '../../services/partido-jugadores';
 import { PartidosListService } from '../../services/partidos';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
@@ -51,12 +53,22 @@ export class CrearPartidoPage {
     equipo2: '',
     txtEquipo1: '',
     txtEquipo2: '',
-    ganador:''
+    ganador:'',
+    jugadoresApuntados: ['']
+  };
+
+  partidoJugador : PartidosJugadores ={ 
+    id_partido: '',
+    id_jugador: '', 
+    nombreJugador: ''
   };
 
 
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private partidosListService : PartidosListService, private mapsAPILoader: MapsAPILoader,
+
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private partidosListService : PartidosListService,
+    private partidosJugadoresService : PartidosJugadoresService,
+    private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) {
   
     this.searchControl = new FormControl();
@@ -71,10 +83,14 @@ export class CrearPartidoPage {
   partido.log = this.longitude;
   partido.ciudad = this.ciudad;
   partido.direccion = this.direccion;
-  partido.Opciones.city= "{name:["+partido.ciudad+"]}";
+  var str = "{\"geo\":[{\"lat\":" + this.latitude+",\"lon\":" + this.longitude+"}]}";
+  str = str.replace("\\"," ");
+  console.log ("str openweather"+ str)
+  partido.Opciones.city=str;
   console.log("partido.direccion: " + partido.direccion);
-  console.log("partido.Opciones.city: " + partido.Opciones.city);
 
+  partido.jugadoresApuntados = [''] ;
+  console.log("partido.jugadoresApuntados: " + partido.jugadoresApuntados);
   this.partidosListService.addPartido(partido).then(ref => {
     let alert = this.alertCtrl.create({
       title: 'Creando Partido',
@@ -85,6 +101,13 @@ export class CrearPartidoPage {
     this.cleanInputs();
     this.navCtrl.push(TabsPage);
   })
+
+  //añado el partido tambien en los partidos a apuntarse
+  /*this.partidoJugador.id_partido= partido.key;
+  this.partidosJugadoresService.addPartidoJugadores(this.partidoJugador).then(ref =>{
+    console.log("Se ha añadido el partido a PartidosJugadores");
+  });*/
+
 }
 
 cleanInputs(){

@@ -43,6 +43,10 @@ export class AdminitraPartidoPage {
     console.log("this.partidoRecibido.ciudad " + this.partidoRecibido.ciudad);
     console.log("this.partidoRecibido.titulo " + this.partidoRecibido.titulo);
 
+    if(parseInt(this.partidoRecibido.equipo1) > parseInt(this.partidoRecibido.equipo2)) 
+      this.partidoRecibido.ganador="1";
+    else
+      this.partidoRecibido.ganador="0";
 
 
     this.partidosS.updatePartido(this.partidoRecibido).then(ref => {
