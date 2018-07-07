@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PartidosListService } from '../../services/partidos';
 import { Partido } from '../../model/partidos.note';
 import { AlertController } from 'ionic-angular';
-import { MisPartidosPage } from '../mis-partidos/mis-partidos';
+import { PartidosPasadosPage } from '../partidos-pasados/partidos-pasados';
 /**
  * Generated class for the AdminitraPartidoPage page.
  *
@@ -55,7 +55,7 @@ export class AdminitraPartidoPage {
         subTitle: 'Se ha actualizado el partido correctamente',
         buttons: ['Aceptar']
       });
-      this.navCtrl.push(MisPartidosPage);
+      this.navCtrl.push(PartidosPasadosPage);
 
       })
   
