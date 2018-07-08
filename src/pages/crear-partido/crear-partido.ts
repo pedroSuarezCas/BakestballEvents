@@ -1,14 +1,13 @@
-import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Partido } from '../../model/partidos.note';
 import { PartidosJugadores } from '../../model/partidosJugadores.note';
 import { PartidosJugadoresService } from '../../services/partido-jugadores';
-import { PartidosListService } from '../../services/partidos';
+import { PartidosListService } from '../../services/partido';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import moment from 'moment';
 import {FormControl} from "@angular/forms";
-import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 
 declare var google: any;
@@ -49,8 +48,8 @@ export class CrearPartidoPage {
         unitFormat: 'metric',
         lang: 'es',
     },
-    equipo1: '',
-    equipo2: '',
+    resulEquipo1: '',
+    resulEquipo2: '',
     txtEquipo1: '',
     txtEquipo2: '',
     ganador:'',
@@ -119,8 +118,8 @@ cleanInputs(){
   this.partido.lat = 0;
   this.partido.log = 0;
   this.partido.cubierta=false;
-  this.partido.equipo1="";
-  this.partido.equipo2="";
+  this.partido.resulEquipo1="";
+  this.partido.resulEquipo1="";
   this.partido.txtEquipo1="";
   this.partido.txtEquipo2="";
   this.partido.Opciones.apikey="925553bcd93cef1c7dad01652b823e68";

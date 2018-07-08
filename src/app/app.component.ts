@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 export const firebaseConfig = {
 

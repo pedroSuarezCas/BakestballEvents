@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>CREA UN PARTIDO</ion-title>
+    <ion-title>CREA TU
+       PARTIDO</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,40 +12,29 @@
   <ion-list>
     
       <ion-item>
-        <ion-input placeholder="Nombre del partido" [(ngModel)]="partido.titulo"   type="text"></ion-input>
+          <ion-label>Nombre del partido</ion-label>
+        <ion-input  [(ngModel)]="partido.titulo"   type="text"></ion-input>
       </ion-item>
+  
+        <ion-item>
+          <ion-label>Dirección</ion-label>
+          <ion-input id="places" [(ngModel)]="partido.direccion" type="text"></ion-input>
+        </ion-item>
 
       <ion-item>
-        <ion-input placeholder="Direccion" id="places" [(ngModel)]="partido.direccion" type="text"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label fixed>Empieza</ion-label>
-        <ion-datetime fixed displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="partido.fecha"></ion-datetime>    
+          <ion-label>Empieza</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="partido.fecha"></ion-datetime>    
       </ion-item>
           
       <ion-item>
-        <ion-label fixed>Cancha</ion-label>
+          <ion-label>Cancha</ion-label>
         <ion-input [(ngModel)]="partido.nombreCancha" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label> Cubierta</ion-label>
-        <ion-toggle [(ngModel)]="partido.cubierta" checked="false"></ion-toggle>
+        <ion-label>Cubierta</ion-label>
+        <ion-toggle  [(ngModel)]="partido.cubierta" checked="false"></ion-toggle>
       </ion-item>
-
-     <!-- <ion-item>
-          <ion-label>Nivel mínimo</ion-label>
-          <ion-select  cancelText="Cancelar" okText="Ok">
-            <ion-option value="sin">Cualquiera</ion-option>
-            <ion-option value="0">Amateur</ion-option>
-            <ion-option value="1">Rookie</ion-option>
-            <ion-option value="2">Sophomore Junior</ion-option>
-            <ion-option value="3">Sophomore Senior</ion-option>
-            <ion-option value="4">All Star</ion-option>
-            <ion-option value="5">MVP All Star</ion-option>
-          </ion-select>
-        </ion-item>-->
 
     </ion-list>
     <ion-item>

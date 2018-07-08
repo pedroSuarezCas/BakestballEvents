@@ -1,24 +1,15 @@
-import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component,  ElementRef,  ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , Platform  } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { } from 'googlemaps';
-import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs/Observable';
 import { PartidosJugadoresService } from '../../services/partido-jugadores';
-import { PartidosListService } from '../../services/partidos';
-import { PartidosJugadores } from '../../model/partidosJugadores.note';
+import { PartidosListService } from '../../services/partido';
 import { Partido } from '../../model/partidos.note';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Facebook } from '@ionic-native/facebook';
 
-declare var google;
-let map: any;
-let infowindow: any;
-let options = {
-  enableHighAccuracy: true,
-  timeout: 10000,
-  maximumAge: 0
-};
+
 @IonicPage()
 @Component({
   selector: 'page-mapa',
@@ -39,10 +30,6 @@ export class MapaPage {
     public partidosJugadoresService : PartidosJugadoresService,
     public afAuth: AngularFireAuth,
     private fb: Facebook) {
-  /*  platform.ready().then(() => {
-      this.initMap();
-    });*/
-
     this.pachangas = partidosS.getPartidoList()
     .snapshotChanges()
     .map(
@@ -104,7 +91,6 @@ export class MapaPage {
         });
       }
       console.log("Jugadores apuntados que vamos a grabar: "+ partido.jugadoresApuntados)
-      console.log("partido a updatear" + partido)
       this.partidosS.updatePartido(partido);
 
       /*this.currentUser = this.afAuth.auth.currentUser;

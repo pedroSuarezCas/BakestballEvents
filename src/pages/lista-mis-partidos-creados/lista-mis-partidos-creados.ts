@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PartidosListService } from '../../services/partidos';
-import { AngularFireList } from 'angularfire2/database';
+import { PartidosListService } from '../../services/partido';
 import { Observable } from 'rxjs/Observable';
-import { Partido } from '../../model/partidos.note';
 import { AdminitraPartidoPage } from '../adminitra-partido/adminitra-partido';
 
 /**

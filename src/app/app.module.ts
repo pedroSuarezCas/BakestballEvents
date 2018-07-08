@@ -21,7 +21,7 @@ import { ListaMisPartidosCreadosPage } from '../pages/lista-mis-partidos-creados
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { PartidosListService } from '../services/partidos';
+import { PartidosListService } from '../services/partido';
 import { PartidosJugadoresService } from '../services/partido-jugadores';
 import { miPerfilService } from '../services/jugador';
 import { Facebook } from '@ionic-native/facebook';

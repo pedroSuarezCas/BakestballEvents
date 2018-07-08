@@ -15,8 +15,8 @@ export interface Partido {
         unitFormat: string;
         lang: string;
     },
-    equipo1: string;
-    equipo2: string;
+    resulEquipo1: string;
+    resulEquipo2: string;
     txtEquipo1: string;
     txtEquipo2: string;
     ganador: string;

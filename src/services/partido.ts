@@ -11,7 +11,9 @@ export class PartidosListService {
        // private fechaActual = new Date();
         fechaActual:any;
 
-        constructor(private db: AngularFireDatabase) { }
+        constructor(private db: AngularFireDatabase) { 
+            
+        }
      
         getPartidoList() {
             return this.partidoListRef;

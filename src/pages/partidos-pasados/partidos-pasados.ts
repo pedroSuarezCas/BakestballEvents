@@ -1,6 +1,6 @@
-import { Component, AnimationKeyframesSequenceMetadata } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {PartidosListService} from '../../services/partidos';
+import {PartidosListService} from '../../services/partido';
 import { Observable } from 'rxjs/Observable';
 
 @IonicPage()

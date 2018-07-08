@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PartidosListService } from '../../services/partidos';
+import { PartidosListService } from '../../services/partido';
 import { Observable } from 'rxjs/Observable';
 import { PartidosJugadoresService } from '../../services/partido-jugadores';
 @IonicPage()
