@@ -1,17 +1,18 @@
 <ion-header>
   <ion-navbar>
 		<ion-title>
-		Bienvenido a BasketEventsApp
+		BASKET EVENTS
 		</ion-title>
 	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="contenido">
+   
   <ion-card>
     <ion-card-content>
-    <p>
-     En BasketEventsApp podrás unirte a partidos de baloncesto en tu localización actual.
-    </p>
+    <h1>
+     Registrate, apuntate, ¡juega!
+    </h1>
     <div *ngIf="isLoggedIn; else facebookLogin">
       <h5>Hola</h5>
       <!--<ion-input placeholder="Nombre del partido" [(ngModel)]="partido.titulo"   type="text"></ion-input>-->
@@ -25,10 +26,13 @@
       </p>
     </div>
   <ng-template #facebookLogin>
-       <button ion-button outline (click)="signInWithFacebook()"> <ion-icon name="logo-facebook"></ion-icon></button>  
+       <button ion-button full (click)="signInWithFacebook()"> <ion-icon name="logo-facebook" class="iconoRed"></ion-icon> Iniciar sesión con Facebook</button>  
    </ng-template>
-      <button ion-button outline (click)="loginWithGoogle()"> <ion-icon name="logo-google"></ion-icon></button>  
+      <button ion-button full (click)="loginWithGoogle()" class="google"> <ion-icon name="logo-google" class="iconoRed"></ion-icon> Iniciar sesión con Google</button>  
 
+      <h3>
+          Podrás buscar partidos cercanos a ti, crear tus propios partidos para invitar a tus amigos y mucho más!
+        </h3>
   </ion-card-content>
-</ion-card>
+  </ion-card>
 </ion-content>

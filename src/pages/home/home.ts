@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, GESTURE_MENU_SWIPE } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { miPerfilService} from '../../services/jugador';
 import { Facebook } from '@ionic-native/facebook';
+//import { Geolocation } from '@ionic-native/geolocation';
 import { Jugador } from '../../model/jugador.note';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-
+import AuthProvider = firebase.auth.AuthProvider;
 
 
 

@@ -82,8 +82,14 @@ export class MapaPage {
       if( this.currentUser != null){
        // partido.id_jugador = this.currentUser.uid;
        console.log("Apuntarse a partido via gmail con user " + this.currentUser);
-       partido.jugadoresApuntados.push(this.currentUser.displayName);
-      }else{
+        if(partido.jugadoresApuntados!=null)
+           partido.jugadoresApuntados.push(this.currentUser.displayName);
+        else{
+         // partido.jugadoresApuntados='';
+          partido.jugadoresApuntados.push(this.currentUser.displayName);
+        }
+
+        }else{
         this.fb.getLoginStatus().then(res =>{
           console.log("Apuntarse a partido via face con user "+ res.authResponse.name );
           partido.jugadoresApuntados.push(res.authResponse.name);

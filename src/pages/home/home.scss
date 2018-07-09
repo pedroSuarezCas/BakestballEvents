@@ -1,3 +1,37 @@
 page-home {
+ .contenido{
+     background-image: url('../../assets/imgs/fondoHome.jpg');
+     background-size: cover;
+     background-repeat: no-repeat;
+ }  
 
+ .card-ios h1 {
+    margin: 0 0 2px;
+    font-size: 2.2rem;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.card-ios h3, .card-ios h4, .card-ios h5, .card-ios h6 {
+    margin: 20px 0;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.card-ios {
+
+    background: rgba(165, 178, 184, 0.9);
+   
+}
+
+ .google{
+     background-color: #3f79e0;
+ }
+ .iconoRed{margin-right: 10px;}
 }
