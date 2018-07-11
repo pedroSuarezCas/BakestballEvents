@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PartidosListService } from '../../services/partido';
 import { Observable } from 'rxjs/Observable';
-import { AdminitraPartidoPage } from '../adminitra-partido/adminitra-partido';
+import { AdminitraPartidoPage } from '../administra-partido/administra-partido';
 
 /**
  * Generated class for the ListaMisPartidosCreadosPage page.

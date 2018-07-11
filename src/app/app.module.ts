@@ -16,7 +16,7 @@ import { MisPartidosPage } from '../pages/mis-partidos/mis-partidos';
 import { CrearPartidoPage } from '../pages/crear-partido/crear-partido';
 import { PartidosPasadosPage } from '../pages/partidos-pasados/partidos-pasados';
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
-import { AdminitraPartidoPage } from '../pages/adminitra-partido/adminitra-partido';
+import { AdminitraPartidoPage } from '../pages/administra-partido/administra-partido';
 import { ListaMisPartidosCreadosPage } from '../pages/lista-mis-partidos-creados/lista-mis-partidos-creados';
 
 import { StatusBar } from '@ionic-native/status-bar';

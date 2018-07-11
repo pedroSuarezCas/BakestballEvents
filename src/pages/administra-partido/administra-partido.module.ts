@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { AdminitraPartidoPage } from './adminitra-partido';
+import { AdminitraPartidoPage } from './administra-partido';
 
 @NgModule({
   declarations: [

@@ -34,11 +34,12 @@
                     <p>{{ partido.direccion }}</p>
               </ion-item>
 
-              <ion-item>
-                  <ion-icon name="body" item-left large ></ion-icon>
-                    <h2>Jugadores Apuntados: {{partido.jugadoresApuntados}}</h2>
+              <ion-item>Jugadores Apuntados:</ion-item>
+              <ion-item *ngFor="let fr of partido.jugadoresApuntados; let j = index"> 
+                   <ion-icon name="body" item-left large ></ion-icon>
+                   <ion-label> {{fr}}<br/></ion-label>
               </ion-item>
-              
+            
             <!--  <ion-item>
                 <ion-icon name="body" item-left large ></ion-icon>
                   <h2>opciones: {{partido.Opciones.city}}</h2>

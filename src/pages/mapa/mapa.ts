@@ -8,7 +8,7 @@ import { PartidosListService } from '../../services/partido';
 import { Partido } from '../../model/partidos.note';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Facebook } from '@ionic-native/facebook';
-
+import { AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -26,7 +26,7 @@ export class MapaPage {
 
   @ViewChild('map') mapElement: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, 
-    public partidosS: PartidosListService,
+    public partidosS: PartidosListService, private alertCtrl: AlertController,
     public partidosJugadoresService : PartidosJugadoresService,
     public afAuth: AngularFireAuth,
     private fb: Facebook) {
@@ -74,20 +74,20 @@ export class MapaPage {
        }
     partido.lastOpen = infoWindow;
     infoWindow.open();
+    partido.lastOpen=null;
     
     }
     
     apuntarseAPartido(partido : Partido){
-     this.currentUser = this.afAuth.auth.currentUser;
+    this.currentUser = this.afAuth.auth.currentUser;
       if( this.currentUser != null){
-       // partido.id_jugador = this.currentUser.uid;
-       console.log("Apuntarse a partido via gmail con user " + this.currentUser);
-        if(partido.jugadoresApuntados!=null)
+          console.log("Apuntarse a partido via gmail con user " + this.currentUser);
+         if(partido.jugadoresApuntados!=null)
            partido.jugadoresApuntados.push(this.currentUser.displayName);
-        else{
-         // partido.jugadoresApuntados='';
+         else{
+          partido.jugadoresApuntados=[];
           partido.jugadoresApuntados.push(this.currentUser.displayName);
-        }
+          }
 
         }else{
         this.fb.getLoginStatus().then(res =>{
@@ -96,8 +96,16 @@ export class MapaPage {
         //partido.id_jugador = res.authResponse.name;
         });
       }
-      console.log("Jugadores apuntados que vamos a grabar: "+ partido.jugadoresApuntados)
-      this.partidosS.updatePartido(partido);
+      console.log("Jugadores apuntados que vamos a grabar: "+ partido.jugadoresApuntados);
+      this.partidosS.updatePartido(partido).then(ref => {
+        let alert = this.alertCtrl.create({
+          title: 'Apuntado al Partido',
+          subTitle: 'Te has apuntado al partido correctamente',
+          buttons: ['Aceptar']
+        });
+        alert.present();
+       
+      })
 
       /*this.currentUser = this.afAuth.auth.currentUser;
       if( this.currentUser != null){

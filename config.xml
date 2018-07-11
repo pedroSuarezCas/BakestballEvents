@@ -21,10 +21,10 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
-    <preference name="SplashScreen" value="assets/imags/logo.png" />
-    <preference name="SplashScreenBackgroundColor" value="#000" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="FadeSplashScreenDuration" value="500" />
+    <preference name="SplashScreen" value="resources/ios/splash/Default-568h@2x~iphone.png" />
+    <preference name="SplashScreenBackgroundColor" value="#8b342e" />
+    <preference name="SplashScreenDelay" value="5000" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />

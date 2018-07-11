@@ -41,7 +41,7 @@ export class PartidosListService {
         }
      
         updatePartido(partido: Partido) {
-            return this.partidoListRef.update(partido.key, partido);
+            return this.partidoListRef.set(partido.key,partido);
         }
 
        /* updatePartidoByApuntarse(partido: Partido) {

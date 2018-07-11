@@ -8,8 +8,8 @@ import { PartidosPasadosPage } from '../partidos-pasados/partidos-pasados';
 
 @IonicPage()
 @Component({
-  selector: 'page-adminitra-partido',
-  templateUrl: 'adminitra-partido.html',
+  selector: 'page-administra-partido',
+  templateUrl: 'administra-partido.html',
 })
 export class AdminitraPartidoPage {
 
