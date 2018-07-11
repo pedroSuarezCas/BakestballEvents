@@ -82,11 +82,12 @@ export class CrearPartidoPage {
   partido.log = this.longitude;
   partido.ciudad = this.ciudad;
   partido.direccion = this.direccion;
-  var str = "{\"geo\":[{\"lat\":" + this.latitude+",\"lon\":" + this.longitude+"}]}";
-  str = str.replace("\\"," ");
+  //var str = "{\"geo\":[{\"lat\":" + this.latitude+",\"lon\":" + this.longitude+"}]}";
+  //str = str.replace("\\"," ");
+  var str = "{" + "name"+ ":[" + partido.ciudad +"]}";
   console.log ("str openweather"+ str)
-  partido.Opciones.city=str;
-  console.log("partido.direccion: " + partido.direccion);
+  partido.Opciones.city= JSON.stringify(str);
+  console.log ("  partido.Opciones.city to openweather: "+   partido.Opciones.city);
   //añado el partido tambien en los partidos a apuntarse
  /* console.log("partido.id_partido: " + partido.key);
   this.partidoJugador.id_partido = partido.key;
@@ -95,7 +96,6 @@ export class CrearPartidoPage {
   this.partidosJugadoresService.addPartidoJugadores(this.partidoJugador).then(ref =>{
     console.log("Se ha añadido el partido a PartidosJugadores");
   }); */
-
   partido.jugadoresApuntados = [] ;
   console.log("partido.jugadoresApuntados: " + partido.jugadoresApuntados);
   this.partidosListService.addPartido(partido).then(ref => {

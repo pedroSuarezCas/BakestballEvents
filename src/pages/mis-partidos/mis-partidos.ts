@@ -13,8 +13,6 @@ import { PartidosJugadoresService } from '../../services/partido-jugadores';
 export class MisPartidosPage {
 
   pachangas: Observable<any>;
-  //partidosJugadores : Observable<any>;
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public partidosJugadoresS : PartidosJugadoresService,
