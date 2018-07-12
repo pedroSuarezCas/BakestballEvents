@@ -5,7 +5,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Observable } from 'rxjs/Observable';
 import { ListaMisPartidosCreadosPage } from '../lista-mis-partidos-creados/lista-mis-partidos-creados';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import {TabsPage} from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -37,16 +37,11 @@ export class MiPerfilPage {
     }
 
   }
-  
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MiPerfilPage');
-  }
-  
     irAListaMisPartidosCreados(){
-
-    console.log('Entra en ir a lista partidos');
     this.navCtrl.push(ListaMisPartidosCreadosPage);
+    TabsPage
+    
   }
 
 }

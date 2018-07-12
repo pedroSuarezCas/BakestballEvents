@@ -6,7 +6,6 @@
 
 </ion-header>
 
-
 <ion-content>
     <div class="cabecera"></div>
   <ion-grid>
@@ -14,19 +13,17 @@
       <ion-col col-9 *ngIf="i == 0">
           <h3 >{{usuario.nombre}}</h3>
           <p >{{usuario.email}}</p>
-       </ion-col>
-      <ion-col col-3 *ngIf="i == 0">
-
-        <img class="avatar" src="../../assets/imgs/icono-perfil.png">
-
       </ion-col>
-    
+      <ion-col col-3 *ngIf="i == 0">
+        <img class="avatar" src="../../assets/imgs/icono-perfil.png">
+      </ion-col>
     </ion-row>
+
 	 <ion-row>
       <ion-col col-12>
         <button ion-button full (click)="irAListaMisPartidosCreados()">Administrar partidos</button>
-        
       </ion-col>
     </ion-row>
+    
   </ion-grid>
 </ion-content>

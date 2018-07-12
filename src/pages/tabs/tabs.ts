@@ -18,8 +18,28 @@ export class TabsPage {
   tab5Root = MiPerfilPage;
 
   constructor() {
-   
-   
+   this.tab1Root = MapaPage;
+   this.tab2Root = MisPartidosPage;
+   this.tab3Root = CrearPartidoPage;
+   this.tab4Root = PartidosPasadosPage;
+   this.tab5Root = MiPerfilPage;
     
   }
+
+    public setTab1(MapaPage){
+      this.tab1Root = MapaPage;
+    }
+    public setTab2(MisPartidosPage){
+      this.tab1Root = MisPartidosPage;
+    }
+    public setTab3(CrearPartidoPage){
+      this.tab1Root = CrearPartidoPage;
+    }
+    public setTab4(PartidosPasadosPage){
+      this.tab1Root = PartidosPasadosPage;
+    }
+    public setTab5(MiPerfilPage){
+      this.tab1Root = MiPerfilPage;
+    } 
+
 }

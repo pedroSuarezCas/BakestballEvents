@@ -8,7 +8,6 @@ export class PartidosListService {
  
         private partidoListRef = this.db.list<Partido>('partido-list');
         partidosJugados: AngularFireDatabase;
-       // private fechaActual = new Date();
         fechaActual:any;
 
         constructor(private db: AngularFireDatabase) {
@@ -44,23 +43,6 @@ export class PartidosListService {
             return this.partidoListRef.set(partido.key,partido);
         }
 
-       /* updatePartidoByApuntarse(partido: Partido) {
-            this.db.list<Partido>('partido-list')
-            .valueChanges()
-            .subscribe(snapshots => {
-                snapshots.forEach(snapshot => {
-                 partido.jugadoresApuntados.push(snapshot.jugadoresApuntados.values())
-                });
-
-                .snapshotChanges()
-                .map(
-                  changes => {
-                    return changes.map(c => ({
-                      key: c.payload.key, ...c.payload.val()
-                    }))
-
-                  }*/
-     
         removePartido(partido: Partido) {
             return this.partidoListRef.remove(partido.key);
         }

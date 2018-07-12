@@ -9,7 +9,6 @@ import { PartidosJugadoresService } from '../../services/partido-jugadores';
   templateUrl: 'mis-partidos.html',
 })
 
-
 export class MisPartidosPage {
 
   pachangas: Observable<any>;
@@ -27,13 +26,6 @@ export class MisPartidosPage {
         }))
       });
 
-      //this.partidosJugadores = partidosJugadoresS.getPartidoByIdJugador();
-
-
-    console.log(this.pachangas);
-  }
-
-  ionViewDidLoad() {
     console.log(this.pachangas);
   }
   

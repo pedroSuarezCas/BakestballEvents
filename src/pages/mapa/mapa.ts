@@ -16,7 +16,6 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'mapa.html',
 })
 export class MapaPage {
-  private db: AngularFireDatabase;
   public zoom: number;
   public latitude: number;
   public longitude: number;
@@ -44,12 +43,10 @@ export class MapaPage {
   
 
   ionViewDidLoad() {
-    //set google maps defaults
     this.zoom = 16;
     this.latitude = 0;
     this.longitude = 0;
   
-    //set current position
     this.setCurrentPosition();
     console.log("Latitud: " + this.latitude);
     console.log("Longitud: " + this.longitude);
@@ -62,7 +59,6 @@ export class MapaPage {
         navigator.geolocation.getCurrentPosition((position) => {
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
-            //this.zoom = 4;
         });
     }
   }
@@ -93,7 +89,6 @@ export class MapaPage {
         this.fb.getLoginStatus().then(res =>{
           console.log("Apuntarse a partido via face con user "+ res.authResponse.name );
           partido.jugadoresApuntados.push(res.authResponse.name);
-        //partido.id_jugador = res.authResponse.name;
         });
       }
       console.log("Jugadores apuntados que vamos a grabar: "+ partido.jugadoresApuntados);
@@ -107,137 +102,6 @@ export class MapaPage {
        
       })
 
-      /*this.currentUser = this.afAuth.auth.currentUser;
-      if( this.currentUser != null){
-        partido.id_jugador = this.currentUser.uid;
-      }else{
-        this.fb.getLoginStatus().then(res =>{
-          console.log("id antes del getjugadorByid: " +res.authResponse.userID);
-        partido.id_jugador = res.authResponse.userID;
-        });
-        this.partidosJugadoresService.updatePartidoJugadores(partido);
-      }*/
-
     }
-
-
-  /*
-  initMap() {
-    navigator.geolocation.getCurrentPosition((location) => {
-      //console.log(location);
-      map = new google.maps.Map(this.mapElement.nativeElement, {
-        center: {lat: location.coords.latitude, lng: location.coords.longitude},
-        zoom: 15
-      });
-  
-      infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
-      service.nearbySearch({
-        location: {lat: location.coords.latitude, lng: location.coords.longitude},
-        radius: 1000,
-        type: ['store']
-      }, (results,status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-           // console.log(results[i]);
-            this.createMarker(results[i]);
-          }
-        }
-      });
-    }, (error) => {
-      console.log(error);
-    }, options);
-    //var myplace = {lat: -33.8665, lng: 151.1956};
-  }
-
-  createMarker(place) {
-    var placeLoc = place.geometry.location;
-    var marker = new google.maps.Marker({
-      map: map,
-      position: placeLoc
-    });
-  
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
-  }*/
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /*
-  
-  
-  initMap() {
-    navigator.geolocation.getCurrentPosition((location) => {
-      //console.log(location);
-      map = new google.maps.Map(this.mapElement.nativeElement, {
-        center: {lat: location.coords.latitude, lng: location.coords.longitude},
-        zoom: 10
-      });
-  
-      infowindow = new google.maps.InfoWindow();
-     // var dbRef= firebase.database().ref('bins');
-
-
-
-
-      var service = new google.maps.places.PlacesService(map);
-      service.nearbySearch({
-        location: {lat: location.coords.latitude, lng: location.coords.longitude},
-        radius: 1000,
-        type: ['store']
-      }, (results,status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-           console.log(results[i]);
-           this.createMarker(results[i]);
-          }
-        }
-      });
-    }, (error) => {
-      console.log(error);
-    }, options);
-    //var myplace = {lat: -33.8665, lng: 151.1956};
-  }
-
-  createMarker(place) {
-    var placeLoc = place.geometry.location;
-    var marker = new google.maps.Marker({
-      map: map,
-      position: placeLoc
-    });
-  
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
-  }
-
-
-*/
-
-
-
 
 }

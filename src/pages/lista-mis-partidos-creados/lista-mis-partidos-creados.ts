@@ -4,13 +4,6 @@ import { PartidosListService } from '../../services/partido';
 import { Observable } from 'rxjs/Observable';
 import { AdminitraPartidoPage } from '../administra-partido/administra-partido';
 
-/**
- * Generated class for the ListaMisPartidosCreadosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-lista-mis-partidos-creados',
@@ -18,9 +11,7 @@ import { AdminitraPartidoPage } from '../administra-partido/administra-partido';
 })
 export class ListaMisPartidosCreadosPage {
 
-
   misPartidos: Observable<any>;
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public partidosS: PartidosListService) {
 
@@ -35,10 +26,6 @@ export class ListaMisPartidosCreadosPage {
 
     console.log(this.misPartidos);
   
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaMisPartidosCreadosPage');
   }
 
   abrirAdminstracionPartido(partido) {

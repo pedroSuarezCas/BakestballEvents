@@ -2,7 +2,6 @@ import { Component, NgZone, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Partido } from '../../model/partidos.note';
 import { PartidosJugadores } from '../../model/partidosJugadores.note';
-import { PartidosJugadoresService } from '../../services/partido-jugadores';
 import { PartidosListService } from '../../services/partido';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
@@ -62,21 +61,16 @@ export class CrearPartidoPage {
     nombreJugador: ''
   };
 
-
-
-
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private partidosListService : PartidosListService,
-    private partidosJugadoresService : PartidosJugadoresService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) {
-  
+
     this.searchControl = new FormControl();
 
   }
 
  addPartido (partido : Partido){
    
-  //partido.id_partido =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   partido.fecha = moment(partido.fecha).format("DD-MM-YYYY HH:mm");
   partido.lat = this.latitude;
   partido.log = this.longitude;
@@ -88,14 +82,6 @@ export class CrearPartidoPage {
   console.log ("str openweather"+ str)
   partido.Opciones.city= JSON.stringify(str);
   console.log ("  partido.Opciones.city to openweather: "+   partido.Opciones.city);
-  //añado el partido tambien en los partidos a apuntarse
- /* console.log("partido.id_partido: " + partido.key);
-  this.partidoJugador.id_partido = partido.key;
-  this.partidoJugador.id_jugador = "";
-  this.partidoJugador.nombreJugador = "";
-  this.partidosJugadoresService.addPartidoJugadores(this.partidoJugador).then(ref =>{
-    console.log("Se ha añadido el partido a PartidosJugadores");
-  }); */
   partido.jugadoresApuntados = [] ;
   console.log("partido.jugadoresApuntados: " + partido.jugadoresApuntados);
   this.partidosListService.addPartido(partido).then(ref => {

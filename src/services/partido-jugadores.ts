@@ -22,8 +22,6 @@ export class PartidosJugadoresService{
     removePartidoJugadores(partidoJugador: PartidosJugadores) {
         return this.partidosJugadoresListRef.remove(partidoJugador.key);
     }
-
-
     getPartidoByIdJugador(id_jugador){
         return this.partidosJugadoresListRef.query.equalTo(id_jugador);
     }
