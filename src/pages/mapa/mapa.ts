@@ -1,6 +1,5 @@
 import { Component,  ElementRef,  ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , Platform  } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { } from 'googlemaps';
 import { Observable } from 'rxjs/Observable';
 import { PartidosJugadoresService } from '../../services/partido-jugadores';

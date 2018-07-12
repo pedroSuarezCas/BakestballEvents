@@ -8,6 +8,10 @@ import { TabsPage } from '../tabs/tabs';
 import moment from 'moment';
 import {FormControl} from "@angular/forms";
 import { MapsAPILoader } from '@agm/core';
+import { Facebook } from '@ionic-native/facebook';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+
 
 declare var google: any;
 
@@ -29,10 +33,12 @@ export class CrearPartidoPage {
   @ViewChild("search")
   public searchElementRef;
 
+  currentUser :any;
   startTimeForm: string;
 
   partido : Partido = {
     id_partido:'',
+    id_jugador_crea: '',
     titulo: '',
     fecha: '',
     ciudad: '',
@@ -63,14 +69,25 @@ export class CrearPartidoPage {
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private partidosListService : PartidosListService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) {
+    private ngZone: NgZone,private fb: Facebook , public afAuth: AngularFireAuth ) {
 
     this.searchControl = new FormControl();
 
   }
 
  addPartido (partido : Partido){
-   
+
+  this.currentUser = this.afAuth.auth.currentUser;
+  if( this.currentUser != null){
+    partido.id_jugador_crea= this.currentUser.uid;
+
+    }else{
+      this.fb.getLoginStatus().then(res =>{
+      partido.id_jugador_crea= res.authResponse.userID;
+    })
+    .catch(e => console.log('Error logging into Facebook', e));
+  }
+
   partido.fecha = moment(partido.fecha).format("DD-MM-YYYY HH:mm");
   partido.lat = this.latitude;
   partido.log = this.longitude;
@@ -99,6 +116,7 @@ export class CrearPartidoPage {
 
 cleanInputs(){
   this.partido.titulo="";
+  this.partido.id_jugador_crea="";
   this.partido.direccion="",
   this.partido.fecha="";
   this.partido.ciudad="";

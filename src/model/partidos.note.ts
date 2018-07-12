@@ -1,6 +1,7 @@
 export interface Partido {
     key?: string; 
     id_partido: string;
+    id_jugador_crea: string;
     titulo: string;
     fecha: string;
     ciudad: string;
