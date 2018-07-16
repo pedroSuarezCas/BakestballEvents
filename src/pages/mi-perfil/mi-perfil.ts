@@ -23,12 +23,12 @@ export class MiPerfilPage {
     this.currentUser = this.afAuth.auth.currentUser;
     if( this.currentUser != null){
         this.id_jug = this.currentUser.uid;
-        console.log("id antes del getjugadorByid -(GMAIL): " +  this.id_jug );
+        console.log("id antes del getjugadorByid - GMAIL: " +  this.id_jug );
         this.miPerfil = perfil.getJugadorById(this.id_jug);
 
     }else{
         this.fb.getLoginStatus().then(res =>{
-        console.log("id antes del getjugadorByid: " +res.authResponse.userID);
+        console.log("id antes del getjugadorByid - FACE: " +res.authResponse.userID);
         this.id_jug = res.authResponse.userID;
         this.miPerfil = perfil.getJugadorById(this.id_jug);
         console.log("Mi perfil a iterar: "+this.miPerfil);

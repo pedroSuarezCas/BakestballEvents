@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PartidosListService } from '../../services/partido';
 import { Observable } from 'rxjs/Observable';
-import { PartidosJugadoresService } from '../../services/partido-jugadores';
 import { AlertController } from 'ionic-angular';
 import { MapaPage } from '../mapa/mapa';
 import { Facebook } from '@ionic-native/facebook';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import { Partido } from '../../model/partidos.note';
 @IonicPage()
 @Component({
   selector: 'page-mis-partidos',
@@ -20,22 +19,21 @@ export class MisPartidosPage {
   currentUser: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public partidosJugadoresS : PartidosJugadoresService, private alertCtrl: AlertController,
-    public partidosS: PartidosListService,
-    private fb: Facebook , public afAuth: AngularFireAuth) {
-
+  private alertCtrl: AlertController,
+  public partidosS: PartidosListService,
+  public fb: Facebook , public afAuth: AngularFireAuth) {
+    this.currentUser ="";
     this.currentUser = this.afAuth.auth.currentUser;
-   if( this.currentUser != null){
-       this.pachangas=partidosS.getPartidosByUsuario( this.currentUser.uid );
-       console.log()
+    if( this.currentUser !== undefined && this.currentUser !== ""){
+      this.pachangas=partidosS.getPartidosByNameUsuario( this.currentUser.displayName );
+      console.log("busca por jug  gmail " + this.pachangas);
     }else{
-      this.fb.getLoginStatus().then(res =>{
-        this.pachangas=partidosS.getPartidosByUsuario( res.authResponse.userID );
+        this.fb.getLoginStatus().then(res =>{
+          this.pachangas=partidosS.getPartidosByNameUsuario( res.authResponse.name );
+          console.log("busca por jug face " + this.pachangas);
       })
       .catch(e => console.log('Error logging into Facebook', e));
-     
     }
-
     /*this.pachangas = partidosS.getPartidoList()
     .snapshotChanges()
     .map(
@@ -44,8 +42,6 @@ export class MisPartidosPage {
           key: c.payload.key, ...c.payload.val()
         }))
       });*/
-
-    console.log(this.pachangas);
   }
 
   eliminarPartido(partido){

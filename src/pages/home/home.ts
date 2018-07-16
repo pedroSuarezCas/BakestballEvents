@@ -24,7 +24,6 @@ export class HomePage {
   constructor(public navCtrl : NavController  ,private fb: Facebook, public perfil: miPerfilService, public afAuth: AngularFireAuth) {
 
     this.jugador = {} as any;
-    this.jugador.id_jugador="";
     this.jugador.nombre = "";
     this.jugador.email= "";
 
@@ -32,7 +31,6 @@ export class HomePage {
 			this.user = user;
 		});
    
-    
     fb.getLoginStatus()
       .then(res => {
         if(res.status === "connect") {
@@ -104,5 +102,13 @@ loginWithGoogle() {
       error => console.log(error.message)
     );
   }
+
+  /*ngOnInit() {
+    this.afAuth.auth.getRedirectResult().then(result => {
+    if (result.user) {
+      this.goTabsPage();
+      }
+    });
+ }*/
   
 }

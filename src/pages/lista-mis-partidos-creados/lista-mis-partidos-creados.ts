@@ -22,10 +22,11 @@ export class ListaMisPartidosCreadosPage {
     this.currentUser = this.afAuth.auth.currentUser;
     if( this.currentUser != null){
         this.misPartidos=partidosS.getPartidosByUsuario( this.currentUser.uid );
-        console.log()
+        console.log("this.misPartidos "+this.misPartidos);
      }else{
        this.fb.getLoginStatus().then(res =>{
          this.misPartidos=partidosS.getPartidosByUsuario( res.authResponse.userID );
+         console.log("this.misPartidos "+this.misPartidos);
        })
        .catch(e => console.log('Error logging into Facebook', e));
       
@@ -42,8 +43,6 @@ export class ListaMisPartidosCreadosPage {
         }))
       });*/
 
-    console.log(this.misPartidos);
-  
   }
 
   abrirAdminstracionPartido(partido) {

@@ -30,6 +30,14 @@ export class AdminitraPartidoPage {
     this.partidoRecibido.direccion = partido.direccion;
     this.partidoRecibido.cubierta = partido.cubierta;
 
+    console.log("this.partidoRecibido.key " + this.partidoRecibido.key);
+    console.log("this.partidoRecibido.txtEquipo1 " + this.partidoRecibido.txtEquipo1);
+    console.log("this.partidoRecibido.txtEquipo2 " + this.partidoRecibido.txtEquipo2);
+    console.log("this.partidoRecibido.equipo1 " + this.partidoRecibido.resulEquipo1);
+    console.log("this.partidoRecibido.equipo2 " + this.partidoRecibido.resulEquipo2);
+    console.log("this.partidoRecibido.ciudad " + this.partidoRecibido.ciudad);
+    console.log("this.partidoRecibido.titulo " + this.partidoRecibido.titulo);
+
 
     if(parseInt(this.partidoRecibido.resulEquipo1) > parseInt(this.partidoRecibido.resulEquipo2)) 
       this.partidoRecibido.ganador="1";

@@ -2,7 +2,6 @@ import { Component,  ElementRef,  ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , Platform  } from 'ionic-angular';
 import { } from 'googlemaps';
 import { Observable } from 'rxjs/Observable';
-import { PartidosJugadoresService } from '../../services/partido-jugadores';
 import { PartidosListService } from '../../services/partido';
 import { Partido } from '../../model/partidos.note';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -25,7 +24,6 @@ export class MapaPage {
   @ViewChild('map') mapElement: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, 
     public partidosS: PartidosListService, private alertCtrl: AlertController,
-    public partidosJugadoresService : PartidosJugadoresService,
     public afAuth: AngularFireAuth,
     private fb: Facebook) {
     this.pachangas = partidosS.getPartidoList()
@@ -36,11 +34,8 @@ export class MapaPage {
           key: c.payload.key, ...c.payload.val()
         }))
       });
-
-    console.log(this.pachangas);
   }
   
-
   ionViewDidLoad() {
     this.zoom = 16;
     this.latitude = 0;
@@ -78,16 +73,22 @@ export class MapaPage {
       if( this.currentUser != null){
           console.log("Apuntarse a partido via gmail con user " + this.currentUser);
          if(partido.jugadoresApuntados!=null)
+           //partido.jugadoresApuntados.set(this.currentUser.displayName, "true");
            partido.jugadoresApuntados.push(this.currentUser.displayName);
          else{
-          partido.jugadoresApuntados=[];
-          partido.jugadoresApuntados.push(this.currentUser.displayName);
+           //partido.jugadoresApuntados= new Map<string,string>();
+           partido.jugadoresApuntados= [];
+           partido.jugadoresApuntados.push(this.currentUser.displayName);
           }
-
         }else{
         this.fb.getLoginStatus().then(res =>{
           console.log("Apuntarse a partido via face con user "+ res.authResponse.name );
-          partido.jugadoresApuntados.push(res.authResponse.name);
+            if(partido.jugadoresApuntados!=null)
+               partido.jugadoresApuntados.push(res.authResponse.name);
+           else{
+               partido.jugadoresApuntados= [];
+               partido.jugadoresApuntados.push(res.authResponse.name);
+             }
         });
       }
       console.log("Jugadores apuntados que vamos a grabar: "+ partido.jugadoresApuntados);

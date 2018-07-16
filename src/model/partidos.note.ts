@@ -1,6 +1,6 @@
+
 export interface Partido {
     key?: string; 
-    id_partido: string;
     id_jugador_crea: string;
     titulo: string;
     fecha: string;
@@ -21,5 +21,6 @@ export interface Partido {
     txtEquipo1: string;
     txtEquipo2: string;
     ganador: string;
-    jugadoresApuntados: Array<string>;
+    jugadoresApuntados: Array <string>;
+   // Map<String, User> users = new HashMap<>();
 }

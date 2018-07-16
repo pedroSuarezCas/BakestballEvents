@@ -5,18 +5,16 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
-
-
+import { HomePage } from '../pages/home/home';
 @Injectable()
-
 export class miPerfilService{
 
   resultados :any;
   currentUser:any;
   jugador : Jugador;  
-  private user: firebase.User;
-
-    private jugadorListRef = this.db.list<Jugador>('jugador-list');
+  user: firebase.User;
+  home: HomePage;
+  jugadorListRef = this.db.list<Jugador>('jugador-list');
 
     constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) { 
        
@@ -76,7 +74,7 @@ export class miPerfilService{
     }
 
     signInWithGoogle() {
-		return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
+        return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
     }
 
     private oauthSignIn(provider: AuthProvider) {
@@ -84,12 +82,11 @@ export class miPerfilService{
         return this.afAuth.auth.signInWithPopup(provider).then(()=>{
             self.currentUser = this.afAuth.auth.currentUser;
             self.addJugadorByNameMail(self.currentUser.displayName, self.currentUser.email, self.currentUser.uid, self.jugador);
-         }).catch(function(error) {
+            //this.home.goTabsPage();
+        }).catch(function(error) {
 				
             alert(error.message);
          });
     }
-
-
 
 }

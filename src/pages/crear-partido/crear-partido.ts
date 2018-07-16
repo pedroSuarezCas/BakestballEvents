@@ -1,7 +1,7 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Partido } from '../../model/partidos.note';
-import { PartidosJugadores } from '../../model/partidosJugadores.note';
+
 import { PartidosListService } from '../../services/partido';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
@@ -10,8 +10,6 @@ import {FormControl} from "@angular/forms";
 import { MapsAPILoader } from '@agm/core';
 import { Facebook } from '@ionic-native/facebook';
 import { AngularFireAuth } from 'angularfire2/auth';
-
-
 
 declare var google: any;
 
@@ -37,7 +35,6 @@ export class CrearPartidoPage {
   startTimeForm: string;
 
   partido : Partido = {
-    id_partido:'',
     id_jugador_crea: '',
     titulo: '',
     fecha: '',
@@ -59,35 +56,36 @@ export class CrearPartidoPage {
     txtEquipo2: '',
     ganador:'',
     jugadoresApuntados: []
+    //  jugadoresApuntados:  new Map<string,string>()
   };
 
-  partidoJugador : PartidosJugadores ={ 
-    id_partido: '',
-    id_jugador: '', 
-    nombreJugador: ''
-  };
+
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private partidosListService : PartidosListService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,private fb: Facebook , public afAuth: AngularFireAuth ) {
 
     this.searchControl = new FormControl();
+    this.currentUser = this.afAuth.auth.currentUser;
+  if( this.currentUser != null){
+    this.partido.id_jugador_crea= this.currentUser.uid;
+
+    }else{
+      this.fb.getLoginStatus().then(res =>{
+        console.log ("addPartido -idjugadorface 1 "+ res.authResponse.userID);
+      this.partido.id_jugador_crea = res.authResponse.userID;
+      console.log ("addPartido -idjugadorface 2 "+   this.partido.id_jugador_crea);
+    })
+    .catch(e => console.log('Error logging into Facebook', e));
+  }
+  console.log ("addPartido -idjugadorface 3 "+   this.partido.id_jugador_crea);
 
   }
 
  addPartido (partido : Partido){
 
-  this.currentUser = this.afAuth.auth.currentUser;
-  if( this.currentUser != null){
-    partido.id_jugador_crea= this.currentUser.uid;
-
-    }else{
-      this.fb.getLoginStatus().then(res =>{
-      partido.id_jugador_crea= res.authResponse.userID;
-    })
-    .catch(e => console.log('Error logging into Facebook', e));
-  }
-
+  //partido.jugadoresApuntados= new Map<string,string>();
+  partido.jugadoresApuntados= [];
   partido.fecha = moment(partido.fecha).format("DD-MM-YYYY HH:mm");
   partido.lat = this.latitude;
   partido.log = this.longitude;
@@ -99,8 +97,10 @@ export class CrearPartidoPage {
   console.log ("str openweather"+ str)
   partido.Opciones.city= JSON.stringify(str);
   console.log ("  partido.Opciones.city to openweather: "+   partido.Opciones.city);
-  partido.jugadoresApuntados = [] ;
+  partido.jugadoresApuntados =  [];
   console.log("partido.jugadoresApuntados: " + partido.jugadoresApuntados);
+  partido.id_jugador_crea = this.partido.id_jugador_crea;
+  console.log ("addPartido -idjugadorface 4"+ partido.id_jugador_crea );
   this.partidosListService.addPartido(partido).then(ref => {
     let alert = this.alertCtrl.create({
       title: 'Creando Partido',
@@ -185,6 +185,9 @@ ionViewDidLoad() {
         });
     });
   });
+  
+
+  
 }
 
 private setCurrentPosition() {

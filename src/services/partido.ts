@@ -17,56 +17,33 @@ export class PartidosListService {
             return this.partidoListRef;
         }
 
-        getPartidosByUsuario(id_jugad:string){
-          
-           /*return Observable.create(subscriber =>{
-                return this.partidoListRef.query.orderByChild('id_jugador_crea').equalTo(id_jugad);
-            });*/
+
+        getPartidosByUsuario(id_jug){
             return this.db.list<Partido>('partido-list', ref => {
-                let q =  ref.orderByChild('id_jugador_crea').equalTo(id_jugad);
+                let q =  ref.orderByChild('id_jugador_crea').equalTo(id_jug);
+                console.log( "quer partidos " + q)
                 return q;
-                    }).valueChanges();
-
-            //return this.partidoListRef.query.orderByChild('id_jugador_crea').equalTo(id_jugad);
-
-           /* return Observable.create(subscriber =>{
-
-                const ref = this.db.list<Jugador>('jugador-list').query
-                 .orderByChild('id_jugador')
-                 .equalTo(id_jugador)
-                 const callbackFn = ref.on("value", (snapshot) => {
-                         console.log("Hemos encontrado: "+snapshot.numChildren()+" hijos");
-                          return snapshot.numChildren();
-                     }); 
-                     console.log( "callbackFn: " +callbackFn );
-                     return () => ref.off('value', callbackFn);
-                 });*/
+                    }).snapshotChanges() .map(
+                        changes => {
+                          return changes.map(c => ({
+                            key: c.payload.key, ...c.payload.val()
+                          }))
+                        });;
         }
 
-       /* getPartidosYaJugados(id_jugad){
-             this.fechaActual = moment(new Date()).format("DD-MM-YYYYY HH:mm");
-             console.log("fecha Actual:" + this.fechaActual);
-
-             return this.db.list<Partido>('partido-list', ref => {
-                let q =  ref.orderByChild('fecha').startAt(this.fechaActual)
-                .on('value', function(snapshot) { 
-                    var registro = snapshot.val();
-                    if (registro.id_jugador_crea == 'id_jugad)') 
-                     return registro;
-                    });
+        getPartidosByNameUsuario(name){
+            return this.db.list<Partido>('partido-list', ref => {
+                let q =  ref.orderByChild('jugadoresApuntados').equalTo("0");
+                console.log( "quer name " + q)
                 return q;
-                    }).valueChanges();
-
-
-
-                
-          /*return this.db.list<Partido>('partido-list', ref => {
-            let q =  ref.orderByChild('id_jugador_crea').equalTo(id_jugad).orderByChild('fecha').startAt(this.fechaActual);
-            return q;
-                }).valueChanges();*/
-
-                //}
-
+                    }).snapshotChanges() .map(
+                        changes => {
+                          return changes.map(c => ({
+                            key: c.payload.key, ...c.payload.val()
+                          }))
+                        });;
+        }
+        
         getPartidoById(id_partido){
             return this.partidoListRef.query.equalTo(id_partido);
         }
