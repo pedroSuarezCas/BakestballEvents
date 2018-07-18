@@ -90,12 +90,15 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
-    <plugin name="cordova-plugin-facebook4" spec="^2.1.0">
+    <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="cordova-android-support-gradle-release" spec="^1.4.4">
+        <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
+    </plugin>
+    <plugin name="cordova-plugin-facebook4" spec="^2.2.0">
         <variable name="APP_ID" value="754931861562922" />
         <variable name="APP_NAME" value="BasketballEvents" />
     </plugin>
-    <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <engine name="browser" spec="^5.0.3" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
