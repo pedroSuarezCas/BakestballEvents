@@ -1,3 +1,8 @@
+
+//**Proyecto TFG del Grado de Ingeniería Informática en UNIR** 
+//***************   Convocatoría 2018  ******************** 
+//***************   Autor: Pedro S.C.  **********************/
+
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
@@ -7,14 +12,14 @@ import { Jugador } from '../../model/jugador.note';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-
+import AuthProvider = firebase.auth.AuthProvider;
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  provider: AuthProvider;
   displayName;  
   isLoggedIn : boolean = false;
   jugador : Jugador;  
@@ -98,10 +103,10 @@ goTabsPage(): void{
 loginWithGoogle() {
   this.perfil.signInWithGoogle()
     .then(
-      () => this.goTabsPage(),
+      () =>{  return this.goTabsPage(),
       error => console.log(error.message)
-    );
-  }
+      });
+}
 
   /*ngOnInit() {
     this.afAuth.auth.getRedirectResult().then(result => {

@@ -25,11 +25,13 @@ export class MisPartidosPage {
     this.currentUser ="";
     this.currentUser = this.afAuth.auth.currentUser;
     if( this.currentUser !== undefined && this.currentUser !== ""){
-      this.pachangas=partidosS.getPartidosByNameUsuario( this.currentUser.displayName );
+      //this.pachangas=partidosS.getPartidosByNameUsuario( this.currentUser.displayName );
+      this.pachangas=partidosS.getPartidosByUsuario( this.currentUser.uid );
       console.log("busca por jug  gmail " + this.pachangas);
     }else{
         this.fb.getLoginStatus().then(res =>{
-          this.pachangas=partidosS.getPartidosByNameUsuario( res.authResponse.name );
+          //this.pachangas=partidosS.getPartidosByNameUsuario( res.authResponse.name );
+          this.pachangas=partidosS.getPartidosByUsuario( res.authResponse.userID );
           console.log("busca por jug face " + this.pachangas);
       })
       .catch(e => console.log('Error logging into Facebook', e));

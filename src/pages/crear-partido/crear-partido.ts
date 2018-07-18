@@ -1,7 +1,11 @@
+
+//**Proyecto TFG del Grado de Ingeniería Informática en UNIR** 
+//***************   Convocatoría 2018   ********************** 
+//***************   Autor: Pedro S.C.  **********************/
+
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Partido } from '../../model/partidos.note';
-
 import { PartidosListService } from '../../services/partido';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
