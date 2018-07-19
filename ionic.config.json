@@ -1,6 +1,6 @@
 {
   "name": "basketCourtsApp",
-  "app_id": "",
+  "app_id": "50d6eefd",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
